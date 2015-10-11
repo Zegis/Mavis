@@ -4,7 +4,7 @@ import java.io.RandomAccessFile;
 import java.util.LinkedList;
 
 
-public class LinesCounter {
+public class LinesCounter{
 	
 	private RandomAccessFile file;
 	private String filter; 
@@ -26,7 +26,7 @@ public class LinesCounter {
 	{
 		this(fileToAccess);
 		
-		this.filter = new String("("+filter+")");
+		this.filter = new String(filter);
 	}
 	
 	public int countAllLines(){
@@ -91,6 +91,40 @@ public class LinesCounter {
 			
 			return ret;
 		}
+	}
+	
+	public LinkedList<String> getSomeLinesAfterFilter(int numberOfLines)
+	{
+		LinkedList<String> ret = new LinkedList<>();
+		
+		if(!filter.isEmpty())
+		{
+			String currLine;
+			boolean found = false;
+			
+			try{
+				file.seek(0);
+				while( (currLine = file.readLine()) != null)
+				{
+					if(found && numberOfLines > 0){
+						--numberOfLines;
+						ret.add(currLine);
+					}
+					else if(currLine.contains(filter))
+					{
+						found = true;
+					}
+					else if(numberOfLines == 0)
+					{
+						break;
+					}
+				}
+			}catch(IOException e){
+				ret.clear();
+			}
+		}
+		
+		return ret;
 	}
 	
 	public void setFilter(String filterToApply){

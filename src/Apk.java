@@ -6,15 +6,13 @@ public class Apk {
 	{
 				
 		if(args.length > 0)
-		{
-			System.out.println(args[1]);
-			
+		{			
 			LinesCounter counter = new LinesCounter(args[0],args[1]);
 			
-			System.out.println("There are " + counter.countLinesWithFilter() + " lines in " + args[0] + " file."  );
 			
-			LinkedList<String> tmp = counter.getLinesWithFilter();
-
+			LinkedList<String> tmp = counter.getSomeLinesAfterFilter(20);
+			tmp = stringAdjuster.AdjustToBookList(tmp);
+			
 			for(int i = 0; i < tmp.size(); ++i)
 			{
 				System.out.println(tmp.get(i));
