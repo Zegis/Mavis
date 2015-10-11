@@ -13,7 +13,7 @@ public class stringAdjuster {
 		{
 			lineForRet.append("<strong>");
 			lineForRet.append(listToAdjust.removeFirst());
-			lineForRet.append("</strong> - ");
+			lineForRet.append("</strong> - \n");
 			
 			ret.add(lineForRet.toString());
 			lineForRet.setLength(0);
