@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -16,14 +15,15 @@ public class Apk {
 			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
 			
 			LinkedList<String> tmp = counter.getSomeLinesAfterFilter(20);
+			counter.moveFilterAfterString(tmp.getLast());
 			tmp = stringAdjuster.AdjustToBookList(tmp);
+			
 			
 			try
 			{
 				save.setLength(0);
 				for(int i = 0; i < tmp.size(); ++i)
 				{
-					System.out.print(tmp.get(i));
 					save.writeBytes(tmp.get(i));
 				}
 			}catch(IOException e){

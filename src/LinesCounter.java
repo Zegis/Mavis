@@ -12,7 +12,7 @@ public class LinesCounter{
 	public LinesCounter(String fileToAccess){
 		
 		try{
-			file = new RandomAccessFile(fileToAccess, "r");
+			file = new RandomAccessFile(fileToAccess, "rw");
 		}
 		catch(FileNotFoundException e)
 		{
@@ -125,6 +125,39 @@ public class LinesCounter{
 		}
 		
 		return ret;
+	}
+	
+	public void moveFilterAfterString(String putFilterAfter)
+	{
+		if(!filter.isEmpty() && !putFilterAfter.isEmpty())
+		{
+			String currLine;
+			String newContent = "";
+			try{
+				file.seek(0);
+				while( (currLine = file.readLine()) != null)
+				{
+					if(currLine.contains(filter))
+					{
+						currLine = currLine.replace(filter, "");
+						
+					}
+					if(currLine.equals(putFilterAfter))
+					{
+						currLine += " " + filter;
+					}
+					
+					newContent += currLine + '\n';
+				}
+				System.out.println("Próbuje nadpisaæ: ");
+				file.setLength(0);
+				file.seek(0);
+				file.writeBytes(newContent);
+				
+			}catch(IOException e){
+				System.out.println(e);
+			}
+		}
 	}
 	
 	public void setFilter(String filterToApply){
