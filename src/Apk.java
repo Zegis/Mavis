@@ -10,14 +10,13 @@ public class Apk {
 				
 		if(args.length > 0)
 		{			
-			LinesCounter counter = new LinesCounter(args[0],args[1]);
+			FilterLineReader reader = new FilterLineReader(args[0],args[1]);
 			
 			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
 			
-			LinkedList<String> tmp = counter.getSomeLinesAfterFilter(20);
-			counter.moveFilterAfterString(tmp.getLast());
+			LinkedList<String> tmp = reader.getSomeLinesAfterFilter(20);
+			reader.moveFilterAfterString(tmp.getLast());
 			tmp = stringAdjuster.AdjustToBookList(tmp);
-			
 			
 			try
 			{
