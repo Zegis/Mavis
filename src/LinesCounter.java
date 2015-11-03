@@ -1,8 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.LinkedList;
-
 
 public class LinesCounter{
 	
@@ -47,28 +45,6 @@ public class LinesCounter{
 			ret = 0;
 			return ret;
 		}
-	}
-	
-	public LinkedList<String> getLinesWithFilter(){
-		LinkedList<String> ret = new LinkedList<>();
-		
-		if(!filter.isEmpty())
-		{
-			String currLine;
-			try{
-				file.seek(0);
-				
-				while( (currLine = file.readLine()) != null){
-					if(currLine.contains(filter))
-						ret.add(currLine);
-					
-				}
-			}catch(IOException e){
-				ret.clear();
-			}
-		}
-		
-		return ret;
 	}
 	
 	public int countLinesWithFilter(){
