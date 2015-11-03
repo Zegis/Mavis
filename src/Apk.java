@@ -14,9 +14,7 @@ public class Apk {
 			
 			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
 			
-			LinkedList<String> tmp = reader.getSomeLinesAfterFilter(20);
-			reader.moveFilterAfterString(tmp.getLast());
-			tmp = stringAdjuster.AdjustToBookList(tmp);
+			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
 			
 			try
 			{

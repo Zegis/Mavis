@@ -27,7 +27,18 @@ public class FilterLineReader {
 		this.filter = new String(newfilter);
 	}
 	
-	public LinkedList<String> getSomeLinesAfterFilter(int numberOfLines)
+	public LinkedList<String> getLinesAfterFilterAndMoveIt(int numberOfLines)
+	{
+		LinkedList<String> ret = getSomeLinesAfterFilter(numberOfLines);
+		
+		moveFilterAfterString(ret.getLast());
+		
+		ret = stringAdjuster.AdjustToBookList(ret);
+		
+		return ret;
+	}
+	
+	private LinkedList<String> getSomeLinesAfterFilter(int numberOfLines)
 	{
 		LinkedList<String> ret = new LinkedList<>();
 		
@@ -61,7 +72,7 @@ public class FilterLineReader {
 		return ret;
 	}
 	
-	public void moveFilterAfterString(String putFilterAfter)
+	private void moveFilterAfterString(String putFilterAfter)
 	{
 		if(!filter.isEmpty() && !putFilterAfter.isEmpty())
 		{
