@@ -38,6 +38,29 @@ public class FilterLineReader {
 		return ret;
 	}
 	
+	public LinkedList<String> getLinewsWithFilter()
+	{		
+		LinkedList<String> ret = new LinkedList<>();
+		
+		if(!filter.isEmpty())
+		{
+			String currLine;
+			try{
+				file.seek(0);
+				
+				while( (currLine = file.readLine()) != null){
+					if(currLine.contains(filter))
+						ret.add(currLine);
+					
+				}
+			}catch(IOException e){
+				ret.clear();
+			}
+		}
+				
+		return ret;
+	}
+	
 	private LinkedList<String> getSomeLinesAfterFilter(int numberOfLines)
 	{
 		LinkedList<String> ret = new LinkedList<>();
@@ -105,4 +128,10 @@ public class FilterLineReader {
 		}
 	}
 	
+	
+	public void setFilter(String newFilter)
+	{
+		if(!filter.equals(newFilter))
+			this.filter = newFilter;
+	}
 }
