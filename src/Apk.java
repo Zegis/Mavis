@@ -16,6 +16,10 @@ public class Apk {
 			
 			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
 			
+			FilterBuilder builder = new FilterBuilder();
+			
+			System.out.println("Rok to: " + builder.yearFilterPart());
+			
 			try
 			{
 				save.setLength(0);
