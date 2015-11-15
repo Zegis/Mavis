@@ -31,7 +31,8 @@ public class FilterLineReader {
 	{
 		LinkedList<String> ret = getSomeLinesAfterFilter(numberOfLines);
 		
-		moveFilterAfterString(ret.getLast());
+		if(ret.size() > 0)
+			moveFilterAfterString(ret.getLast());
 		
 		ret = stringAdjuster.AdjustToBookList(ret);
 		
