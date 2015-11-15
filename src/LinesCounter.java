@@ -51,6 +51,7 @@ public class LinesCounter{
 		if(filter.isEmpty())
 			return countAllLines();
 		else{
+			System.out.println(filter);
 			int ret = 0;
 			String currLine;
 			try{

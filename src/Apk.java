@@ -18,7 +18,11 @@ public class Apk {
 			
 			FilterBuilder builder = new FilterBuilder();
 			
-			System.out.println("Rok to: " + builder.yearFilterPart());
+			System.out.println("Filtr to: " + builder.makeFilter(9));
+			
+			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(10));
+			
+			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
 			
 			try
 			{
