@@ -7,13 +7,15 @@ import java.io.UnsupportedEncodingException;
 
 public class LinesCounter{
 	
+	private FileInputStream inputHandle;
 	private BufferedReader file;
 	private String filter; 
 	
 	public LinesCounter(String fileToAccess){
 		
 		try{
-			file = new BufferedReader(new InputStreamReader(new FileInputStream(fileToAccess), "UTF8"));
+			inputHandle = new FileInputStream(fileToAccess);
+			file = new BufferedReader(new InputStreamReader(inputHandle, "UTF8"));
 		}
 		catch(UnsupportedEncodingException e)
 		{
@@ -35,6 +37,8 @@ public class LinesCounter{
 	}
 	
 	public int countAllLines(){
+		
+		this.resetFile();
 		
 		int ret = 0;
 		
@@ -58,6 +62,8 @@ public class LinesCounter{
 		if(filter.isEmpty())
 			return countAllLines();
 		else{
+			this.resetFile();
+			
 			System.out.println(filter);
 			int ret = 0;
 			String currLine;
@@ -78,6 +84,19 @@ public class LinesCounter{
 	public void setFilter(String filterToApply){
 		if(!filterToApply.equals(filter))
 			filter = "(" +	filterToApply + ")";
+	}
+	
+	private void resetFile()
+	{
+		try
+		{
+			inputHandle.getChannel().position(0);
+			file = new BufferedReader(new InputStreamReader(inputHandle, "UTF8"));
+		}
+		catch(IOException e)
+		{
+			System.out.print(e);
+		}
 	}
 	
 }

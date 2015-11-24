@@ -23,6 +23,7 @@ public class Apk {
 			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(10));
 			
 			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
+			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
 			
 			try
 			{
