@@ -25,11 +25,10 @@ public class Apk {
 			
 			FilterBuilder builder = new FilterBuilder();
 			
-			System.out.println("Filtr to: " + builder.makeFilter(9));
+			System.out.println("Filtr to: " + builder.makeCurrentTimeFilter());
 			
-			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(10));
+			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(1));
 			
-			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
 			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
 			
 			DefaultCategoryDataset dataset = new DefaultCategoryDataset();

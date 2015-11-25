@@ -17,11 +17,15 @@ public class FilterBuilder {
 		locale = new Locale("pl");
 	}
 	
+	public String makeCurrentTimeFilter()
+	{
+		return makeFilter(Calendar.getInstance().get(Calendar.MONTH));
+	}
+	
 	public String makeFilter(int currentMonth)
 	{
 		if(filter.isEmpty() || currentMonth != generatedForMonth)
 		{
-			System.out.println("Generuje filtr dla " + currentMonth);
 			generatedForMonth = currentMonth;
 			filter = monthFilterPart(currentMonth) + yearFilterPart();
 		}
@@ -34,7 +38,7 @@ public class FilterBuilder {
 	{
 		DateFormatSymbols dateSymbols = new DateFormatSymbols(locale);
 		
-		return ( "(" + dateSymbols.getShortMonths()[monthNumber -1] ); //in monthNumber 1 is for febuary and in array 0 is for febuary 
+		return ( "(" + dateSymbols.getShortMonths()[monthNumber]);
 	}
 	
 	public String yearFilterPart()
