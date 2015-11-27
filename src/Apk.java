@@ -1,7 +1,14 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.LinkedList;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Apk {
 
@@ -15,6 +22,30 @@ public class Apk {
 			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
 			
 			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
+			
+			FilterBuilder builder = new FilterBuilder();
+			
+			System.out.println("Filtr to: " + builder.makeCurrentTimeFilter());
+			
+			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(1));
+			
+			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
+			
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
+			dataset.setValue(1, "Finished", "Games");
+			dataset.setValue(1, "Finished", "Dev Posts");
+			dataset.setValue(0, "Finished", "Blog Posts");
+			dataset.setValue(6, "Finished", "Commits");
+			
+			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
+			try
+			{
+				ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
+			}catch(IOException e)
+			{
+				System.out.println(e);
+			}
 			
 			try
 			{

@@ -1,20 +1,29 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class LinesCounter{
 	
-	private RandomAccessFile file;
+	private FileInputStream inputHandle;
+	private BufferedReader file;
 	private String filter; 
 	
 	public LinesCounter(String fileToAccess){
 		
 		try{
-			file = new RandomAccessFile(fileToAccess, "rw");
+			inputHandle = new FileInputStream(fileToAccess);
+			file = new BufferedReader(new InputStreamReader(inputHandle, "UTF8"));
+		}
+		catch(UnsupportedEncodingException e)
+		{
+			System.out.println(e);
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println(e);
+			System.out.print(e);
 		}
 		
 		filter = "";
@@ -28,6 +37,8 @@ public class LinesCounter{
 	}
 	
 	public int countAllLines(){
+		
+		this.resetFile();
 		
 		int ret = 0;
 		
@@ -51,11 +62,12 @@ public class LinesCounter{
 		if(filter.isEmpty())
 			return countAllLines();
 		else{
+			this.resetFile();
+			
+			System.out.println(filter);
 			int ret = 0;
 			String currLine;
-			try{
-				file.seek(0);
-				
+			try{				
 				while( (currLine = file.readLine()) != null)
 					if(currLine.contains(filter))
 						++ret;
@@ -72,6 +84,19 @@ public class LinesCounter{
 	public void setFilter(String filterToApply){
 		if(!filterToApply.equals(filter))
 			filter = "(" +	filterToApply + ")";
+	}
+	
+	private void resetFile()
+	{
+		try
+		{
+			inputHandle.getChannel().position(0);
+			file = new BufferedReader(new InputStreamReader(inputHandle, "UTF8"));
+		}
+		catch(IOException e)
+		{
+			System.out.print(e);
+		}
 	}
 	
 }
