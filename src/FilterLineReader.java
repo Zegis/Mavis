@@ -27,16 +27,10 @@ public class FilterLineReader {
 		this.filter = new String(newfilter);
 	}
 	
-	public LinkedList<String> getLinesAfterFilterAndMoveIt(int numberOfLines)
+	public void setFilter(String newFilter)
 	{
-		LinkedList<String> ret = getSomeLinesAfterFilter(numberOfLines);
-		
-		if(ret.size() > 0)
-			moveFilterAfterString(ret.getLast());
-		
-		ret = stringAdjuster.AdjustToBookList(ret);
-		
-		return ret;
+		if(!filter.equals(newFilter))
+			this.filter = newFilter;
 	}
 	
 	public LinkedList<String> getLinewsWithFilter()
@@ -59,6 +53,17 @@ public class FilterLineReader {
 			}
 		}
 				
+		return ret;
+	}
+	
+	public LinkedList<String> getLinesAfterFilterAndMoveIt(int numberOfLines)
+	{
+		LinkedList<String> ret = getSomeLinesAfterFilter(numberOfLines);
+		
+		moveFilterAfterString(ret.getLast());
+		
+		ret = stringAdjuster.AdjustToBookList(ret);
+		
 		return ret;
 	}
 	
@@ -127,12 +132,5 @@ public class FilterLineReader {
 				System.out.println(e);
 			}
 		}
-	}
-	
-	
-	public void setFilter(String newFilter)
-	{
-		if(!filter.equals(newFilter))
-			this.filter = newFilter;
 	}
 }
