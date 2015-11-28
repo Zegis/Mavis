@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -12,14 +13,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Apk {
 
-	public static void main(String args[]) throws FileNotFoundException
+	public static void main(String args[]) throws IOException
 	{
 				
 		if(args.length > 0)
 		{			
 			FilterLineReader reader = new FilterLineReader(args[0],"-- 100 lat");
 			
-			RandomAccessFile save = new RandomAccessFile(args[1], "rw");
+			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
 			
 			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
 			
@@ -27,16 +28,17 @@ public class Apk {
 			
 			System.out.println("Filtr to: " + builder.makeCurrentTimeFilter());
 			
-			LinesCounter count = new LinesCounter(args[0],builder.makeFilter(1));
-			
-			System.out.println("Ksiazki przeczytane: " + count.countLinesWithFilter());
+			LinesCounter count = new LinesCounter(args[0],builder.makeCurrentTimeFilter());
 			
 			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 			dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
-			dataset.setValue(1, "Finished", "Games");
-			dataset.setValue(1, "Finished", "Dev Posts");
-			dataset.setValue(0, "Finished", "Blog Posts");
-			dataset.setValue(6, "Finished", "Commits");
+			
+			count.setFileToAccess(args[1]);
+			
+			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
+			dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
+			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
+			dataset.setValue(getData("Commits"), "Finished", "Commits");
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
 			try
@@ -68,5 +70,23 @@ public class Apk {
 		{
 			System.out.println("Need filename!");
 		} 
-	}	
+	}
+	
+	public static int getData(String dataName) throws IOException
+	{
+		int ret = 0;
+		 System.out.println(System.in.available());
+		Scanner input = new Scanner(System.in);
+		
+		String val;
+		do
+		{
+			System.out.print("\nEnter number of " + dataName +": ");
+			val = input.nextLine();
+		}while(!val.matches("\\d+"));
+		ret = Integer.parseInt(val);
+		
+		
+		return ret;
+	}
 }
