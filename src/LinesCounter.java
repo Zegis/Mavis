@@ -13,6 +13,13 @@ public class LinesCounter{
 	
 	public LinesCounter(String fileToAccess){
 		
+		setFileToAccess(fileToAccess);
+		
+		filter = "";
+	}
+	
+	public void setFileToAccess(String fileToAccess)
+	{
 		try{
 			inputHandle = new FileInputStream(fileToAccess);
 			file = new BufferedReader(new InputStreamReader(inputHandle, "UTF8"));
@@ -25,8 +32,6 @@ public class LinesCounter{
 		{
 			System.out.print(e);
 		}
-		
-		filter = "";
 	}
 	
 	public LinesCounter(String fileToAccess, String filter)
@@ -64,7 +69,6 @@ public class LinesCounter{
 		else{
 			this.resetFile();
 			
-			System.out.println(filter);
 			int ret = 0;
 			String currLine;
 			try{				
