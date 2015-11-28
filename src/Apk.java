@@ -17,9 +17,9 @@ public class Apk {
 				
 		if(args.length > 0)
 		{			
-			FilterLineReader reader = new FilterLineReader(args[0],args[1]);
+			FilterLineReader reader = new FilterLineReader(args[0],"-- 100 lat");
 			
-			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
+			RandomAccessFile save = new RandomAccessFile(args[1], "rw");
 			
 			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
 			
