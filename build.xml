@@ -15,8 +15,8 @@
 	<property name="jfreechart" value="https://repo1.maven.org/maven2/org/jfree/jfreechart/${jfreechart.vsn}"/>
     <path id="Mavis.classpath">
         <pathelement location="bin"/>
-        <pathelement location="https://repo1.maven.org/maven2/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar"/>
-        <pathelement location="https://repo1.maven.org/maven2/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar"/>
+        <pathelement location="bin/jcommon-1.0.23.jar"/>
+        <pathelement location="bin/jfreechart-1.0.19.jar"/>
     </path>
 	<target name="download-jchart">
 	<mkdir dir="lib"/>
