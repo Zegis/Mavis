@@ -126,7 +126,7 @@ public class FilterLineReader {
 					
 					newContent += currLine + '\n';
 				}
-				System.out.println("Próbuje nadpisaæ: ");
+				System.out.println("Trying to move filter: ");
 				file.setLength(0);
 				file.seek(0);
 				file.writeBytes(newContent);
