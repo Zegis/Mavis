@@ -50,7 +50,7 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Apk (1)">
+    <target name="Apk">
         <java classname="Apk" failonerror="true" fork="yes">
             <arg line="D:\Ksiazki_Kofun.txt&#13;&#10;D:\Gry_wygrane.txt&#13;&#10;D:\KofunHELPER.txt"/>
             <classpath refid="Mavis.classpath"/>
