@@ -11,7 +11,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class Apk {
+public class Apk{
 
 	public static void main(String args[]) throws IOException
 	{
