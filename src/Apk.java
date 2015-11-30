@@ -76,7 +76,7 @@ public class Apk {
 	{
 		int ret = 0;
 		 System.out.println(System.in.available());
-		Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in); // is not closed because it'd close System.in too. Let VM handle it.
 		
 		String val;
 		do
