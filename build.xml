@@ -22,7 +22,7 @@
 	<mkdir dir="lib"/>
 	<get src="https://repo1.maven.org/maven2/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar" dest="lib/" usetimestamp="true"/>
 	<get src="https://repo1.maven.org/maven2/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar"
-	dest="lib/" usertimestamp="true"/>
+	dest="lib/" usetimestamp="true"/>
 	</target>
     <target depends="download-jchart" name="init">
         <mkdir dir="bin"/>
