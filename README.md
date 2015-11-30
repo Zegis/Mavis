@@ -1,4 +1,4 @@
-#Mavis
+#Mavis [![Build Status](https://travis-ci.org/Zegis/Mavis.svg?branch=master)](https://travis-ci.org/Zegis/Mavis)
 
 _Disclaimer: I've made this only for my own purposes, so I doubt it'll be usefull for you. But! Have a look, fork it and chang it all up if you want!_
 
