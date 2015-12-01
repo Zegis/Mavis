@@ -37,7 +37,7 @@ public class Apk{
 			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 			dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
-			dataset.setValue(getData("Commits"), "Finished", "Tasks");
+			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
 			try
