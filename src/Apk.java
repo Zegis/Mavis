@@ -16,59 +16,71 @@ public class Apk{
 	{
 				
 		if(args.length > 0)
-		{			
-			FilterLineReader reader = new FilterLineReader(args[0],"-- 100 lat");
-			
-			RandomAccessFile save = new RandomAccessFile(args[2], "rw");
-			
-			LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);
-			
-			FilterBuilder builder = new FilterBuilder();
-			
-			System.out.println("Filtr to: " + builder.makeCurrentTimeFilter());
-			
-			LinesCounter count = new LinesCounter(args[0],builder.makeCurrentTimeFilter());
-			
-			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-			dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
-			
-			count.setFileToAccess(args[1]);
-			
-			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
-			dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
-			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
-			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
-			
-			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
-			try
+		{
+			if(args[0].equals("Ohil") && args.length > 2)
 			{
-				ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
-				System.out.print("All green");
-			}catch(IOException e)
-			{
-				System.out.println(e);
-			}
-			
-			try
-			{
-				save.setLength(0);
-				for(int i = 0; i < tmp.size(); ++i)
+				// run One hundred years in library
+				FilterLineReader reader = new FilterLineReader(args[0],"-- 100 lat");
+				
+				RandomAccessFile save = new RandomAccessFile(args[2], "rw");
+				
+				LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);			
+				
+				try
 				{
-					save.writeBytes(tmp.get(i));
+					save.setLength(0);
+					for(int i = 0; i < tmp.size(); ++i)
+					{
+						save.writeBytes(tmp.get(i));
+					}
+				}catch(IOException e){
+					System.out.println(e);
 				}
-			}catch(IOException e){
-				System.out.println(e);
+				
+				try {
+					save.close();
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 			}
-			
-			try {
-				save.close();
-			} catch (IOException e) {
-				System.out.println(e);
+			else if(args[0].equals("Mp"))
+			{
+				System.out.println("Mp!");
+				if(args.length > 1)
+				{
+					FilterBuilder builder = new FilterBuilder();
+					
+					LinesCounter count = new LinesCounter(args[1],builder.makeCurrentTimeFilter());
+					
+					DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+					dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
+					
+					count.setFileToAccess(args[1]);
+					
+					dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
+					dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
+					dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
+					dataset.setValue(getData("Tasks"), "Finished", "Tasks");
+					
+					JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
+					try
+					{
+						ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
+						System.out.print("All green");
+					}catch(IOException e)
+					{
+						System.out.println(e);
+					}
+				}
+			}
+			else
+			{
+				IncorrectUsage();
 			}
 		}
 		else
 		{
-			System.out.println("Need filename!");
+			IncorrectUsage();
 		} 
 	}
 	
@@ -88,5 +100,12 @@ public class Apk{
 		
 		
 		return ret;
+	}
+	
+	public static void IncorrectUsage(){
+		
+		System.out.println("Usage:!");
+		System.out.println("Mavis [cmd] (options)!");
+		System.out.println("Available cmd: Ohil and Mp");
 	}
 }
