@@ -1,3 +1,5 @@
+package pl.kofun.mavis;
+
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;

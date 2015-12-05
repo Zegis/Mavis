@@ -1,3 +1,5 @@
+package pl.kofun.mavis;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;

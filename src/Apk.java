@@ -10,6 +10,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import pl.kofun.mavis.*;
+
 public class Apk{
 
 	public static void main(String args[]) throws IOException
@@ -104,7 +106,7 @@ public class Apk{
 	
 	public static void IncorrectUsage(){
 		
-		System.out.println("Usage:!");
+		System.out.println("Usage:");
 		System.out.println("Mavis [cmd] (options)!");
 		System.out.println("Available cmd: Ohil and Mp");
 	}

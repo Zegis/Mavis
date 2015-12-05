@@ -1,3 +1,5 @@
+package pl.kofun.mavis;
+
 import java.util.LinkedList;
 import java.lang.StringBuilder;
 
