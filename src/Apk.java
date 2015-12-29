@@ -19,7 +19,7 @@ public class Apk{
 				
 		if(args.length > 0)
 		{
-			if(args[0].equals("Ohil") && args.length > 2)
+			if(args[0].equals("Ohil") && args.length > 1)
 			{
 				Library Ohil = new Library(args[1]);
 				
