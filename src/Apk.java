@@ -21,29 +21,9 @@ public class Apk{
 		{
 			if(args[0].equals("Ohil") && args.length > 2)
 			{
-				// run One hundred years in library
-				FilterLineReader reader = new FilterLineReader(args[0],"-- 100 lat");
+				Library Ohil = new Library(args[1]);
 				
-				RandomAccessFile save = new RandomAccessFile(args[2], "rw");
-				
-				LinkedList<String> tmp = reader.getLinesAfterFilterAndMoveIt(20);			
-				
-				try
-				{
-					save.setLength(0);
-					for(int i = 0; i < tmp.size(); ++i)
-					{
-						save.writeBytes(tmp.get(i));
-					}
-				}catch(IOException e){
-					System.out.println(e);
-				}
-				
-				try {
-					save.close();
-				} catch (IOException e) {
-					System.out.println(e);
-				}
+				Ohil.execute();
 			}
 			else if(args[0].equals("Mp"))
 			{
@@ -77,7 +57,8 @@ public class Apk{
 			}
 			else if (args[0].equals("Yp"))
 			{
-				System.out.println("To be implemented");
+				YearPlotter yearp = new YearPlotter();
+				yearp.execute();
 			}
 			else
 			{
