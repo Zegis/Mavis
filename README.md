@@ -1,6 +1,6 @@
 #Mavis [![Build Status](https://travis-ci.org/Zegis/Mavis.svg?branch=master)](https://travis-ci.org/Zegis/Mavis)
 
-_Disclaimer: I've made this only for my own purposes, so I doubt it'll be usefull for you. But! Have a look, fork it and chang it all up if you want!_
+_Disclaimer: I've made this only for my own purposes, so I doubt it'll be usefull for you. But! Have a look, fork it and change it all up if you want!_
 
 ---
 
@@ -13,4 +13,4 @@ Right now it:
 To generate monthly bar charts I use [JFreeChart](http://www.jfree.org/jfreechart/).
 
 ###Dev posts related to project:
-None right now.
+[How I configurated travis.ci for Mavis?](http://kofun.pl/various/using-trvis-ci-with-java-eclipse-project/)
