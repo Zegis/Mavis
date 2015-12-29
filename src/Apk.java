@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
