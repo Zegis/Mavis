@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Hashtable;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -13,19 +14,25 @@ import pl.kofun.mavis.*;
 public class Apk{
 
 	public static void main(String args[]) throws IOException
-	{
-				
+	{		
 		if(args.length > 0)
 		{
-			if(args[0].equals("Ohil") && args.length > 1)
+			ArgumentParser parser = new ArgumentParser();
+			Hashtable<String, String> options = parser.parseArguments(args);
+			
+			if(options.size() > 1)
 			{
-				Library Ohil = new Library(args[1]);
+			if(options.get("Task").equals("Ohil"))
+			{
+				Library Ohil = new Library(options.get("sourcefileName"));
 				
 				Ohil.execute();
 			}
-			else if(args[0].equals("Mp"))
+			else if(options.get("Task").equals("Mp"))
 			{
-				System.out.println("Mp!");
+				MonthPlotter mp = new MonthPlotter();
+				mp.execute();
+				
 				if(args.length > 1)
 				{
 					FilterBuilder builder = new FilterBuilder();
@@ -53,7 +60,7 @@ public class Apk{
 					}
 				}
 			}
-			else if (args[0].equals("Yp"))
+			else if (options.get("Task").equals("Yp"))
 			{
 				YearPlotter yearp = new YearPlotter();
 				yearp.execute();
@@ -62,6 +69,7 @@ public class Apk{
 			{
 				IncorrectUsage();
 			}
+		}
 		}
 		else
 		{
