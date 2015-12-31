@@ -29,16 +29,6 @@ public class ArgumentParser {
 		return options;
 	}
 
-	private void parseMonthPlotterArguments(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void parseYearPlotterArguments(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void incorrectTask()
 	{
 		options.clear();
@@ -50,6 +40,45 @@ public class ArgumentParser {
 		System.out.print("Ohil ");
 		System.out.print("Mp ");
 		System.out.print("Yp ");
+	}
+	
+	private void parseMonthPlotterArguments(String[] args) {
+		if( (args.length-1)%2 == 0)
+		{
+			for(int i=1; i<args.length;)
+			{
+				if(args[i].equalsIgnoreCase("-b"))
+				{
+					options.put("booksfileName", args[i+1]);
+					i+=2;
+				}
+				if(args[i].equalsIgnoreCase("-g"))
+				{
+					options.put("gamesfileName", args[i+1]);
+					i+=2;
+				}
+				else
+				{
+					++i;
+				}
+			}
+		}
+		else
+		{
+			incorrectMonthPlotterArguments();
+		}
+	}
+	
+	private void incorrectMonthPlotterArguments()
+	{
+		System.out.println("Avilable args for Month Plotter:");
+		System.out.println("-b                       defines books filename");
+		System.out.println("-g                       defines games filename");
+	}
+	
+	private void parseYearPlotterArguments(String[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	private void parseLibraryArguments(String args[])
