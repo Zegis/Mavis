@@ -24,14 +24,14 @@ public class Apk{
 			{
 			if(options.get("Task").equals("Ohil"))
 			{
-				Library Ohil = new Library(options.get("sourcefileName"));
+				Library Ohil = new Library(options);
 				
-				Ohil.execute();
+				Ohil.execute(options);
 			}
 			else if(options.get("Task").equals("Mp"))
 			{
 				MonthPlotter mp = new MonthPlotter();
-				mp.execute();
+				mp.execute(options);
 				
 				if(args.length > 1)
 				{
@@ -63,7 +63,7 @@ public class Apk{
 			else if (options.get("Task").equals("Yp"))
 			{
 				YearPlotter yearp = new YearPlotter();
-				yearp.execute();
+				yearp.execute(options);
 			}
 			else
 			{

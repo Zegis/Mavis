@@ -45,7 +45,7 @@ public class ArgumentParser {
 		
 		System.out.println("Incorrect task!");
 		System.out.println("Run as:");
-		System.out.println("Mavic [cmd] [args]");
+		System.out.println("Mavis [cmd] [args]");
 		System.out.print("Available cmd are: ");
 		System.out.print("Ohil ");
 		System.out.print("Mp ");
@@ -56,11 +56,26 @@ public class ArgumentParser {
 	{
 		if( (args.length-1)%2 == 0)
 		{
-			for(int i=1; i<args.length; ++i)
+			for(int i=1; i<args.length;)
 			{
 				if(args[i].equalsIgnoreCase("-s"))
 				{
 					options.put("sourcefileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-t"))
+				{
+					options.put("targetfileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-f"))
+				{
+					options.put("filter", args[i+1]);
+					i+=2;
+				}
+				else
+				{
+					++i;
 				}
 			}
 			
@@ -73,8 +88,10 @@ public class ArgumentParser {
 	
 	private void incorrectLibraryArguments()
 	{
-		System.out.println("Avileable args for Library:");
-		System.out.println("-s filename   defines source file name");
+		System.out.println("Avilable args for Library:");
+		System.out.println("-s                       defines source filename");
+		System.out.println("-t                       defines target filename");
+		System.out.println("-f                       filter to use");
 	}
 	
 }
