@@ -12,20 +12,28 @@ public class Library implements MainTask{
 	
 	public Library(Hashtable<String,String> options)
 	{
-		reader = new FilterLineReader(options.get("sourcefileName"), options.get("filter"));
 		
-		try
+		if(options.containsKey("sourcefile") && options.containsKey("targetfileName") && options.containsKey("filter"))
 		{
-		savefile = new RandomAccessFile(options.get("targetfileName"), "rw");
-		}
-		catch(IOException e)
-		{
-			System.out.println(e);
-		}
 		
+			reader = new FilterLineReader(options.get("sourcefileName"), options.get("filter"));
+			
+			try
+			{
+			savefile = new RandomAccessFile(options.get("targetfileName"), "rw");
+			}
+			catch(IOException e)
+			{
+				System.out.println(e);
+			}
+		}
+		else
+		{
+			System.out.println("Usage: Mavis ohil -f <filter> -t <filename> -s <filename>");
+		}
 	}
 	
-	public void execute(Hashtable<String,String> options)
+	public void execute()
 	{
 		LinkedList<String> books = reader.getLinesAfterFilterAndMoveIt(20);
 		

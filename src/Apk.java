@@ -26,12 +26,12 @@ public class Apk{
 			{
 				Library Ohil = new Library(options);
 				
-				Ohil.execute(options);
+				Ohil.execute();
 			}
 			else if(options.get("Task").equals("Mp"))
 			{
 				MonthPlotter mp = new MonthPlotter();
-				mp.execute(options);
+				mp.execute();
 				
 				if(args.length > 1)
 				{
@@ -63,7 +63,7 @@ public class Apk{
 			else if (options.get("Task").equals("Yp"))
 			{
 				YearPlotter yearp = new YearPlotter();
-				yearp.execute(options);
+				yearp.execute();
 			}
 			else
 			{
