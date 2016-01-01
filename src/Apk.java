@@ -13,7 +13,7 @@ public class Apk{
 			ArgumentParser parser = new ArgumentParser();
 			Hashtable<String, String> options = parser.parseArguments(args);
 			
-			if(options.size() > 1)
+			if(options.containsKey("Task"))
 			{
 				if(options.get("Task").equals("Ohil"))
 				{
