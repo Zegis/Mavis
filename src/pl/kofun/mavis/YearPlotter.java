@@ -10,6 +10,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.TimeSeriesDataItem;
 
 public class YearPlotter implements MainTask{
 
@@ -49,34 +50,13 @@ public class YearPlotter implements MainTask{
 			games.add(new Month(12, 2015),1);
 			
 			TimeSeries posts = new TimeSeries("Posts");
-			
-			posts.add(new Month(1, 2015),getData("Posts in January:"));
-			posts.add(new Month(2, 2015),getData("Posts in February:"));
-			posts.add(new Month(3, 2015),getData("Posts in March:"));
-			posts.add(new Month(4, 2015),getData("Posts in April:"));
-			posts.add(new Month(5, 2015),getData("Posts in May:"));
-			posts.add(new Month(6, 2015),getData("Posts in June:"));
-			posts.add(new Month(7, 2015),getData("Posts in July:"));
-			posts.add(new Month(8, 2015),getData("Posts in August:"));
-			posts.add(new Month(9, 2015),getData("Posts in September:"));
-			posts.add(new Month(10, 2015),getData("Posts in October:"));
-			posts.add(new Month(11, 2015),getData("Posts in November:"));
-			posts.add(new Month(12, 2015),getData("Posts in December:"));
-			
 			TimeSeries devposts = new TimeSeries("Dev blogs");
 			
-			devposts.add(new Month(1, 2015),getData("Dev posts in January:"));
-			devposts.add(new Month(2, 2015),getData("Dev posts in February:"));
-			devposts.add(new Month(3, 2015),getData("Dev posts in March:"));
-			devposts.add(new Month(4, 2015),getData("Dev posts in April:"));
-			devposts.add(new Month(5, 2015),getData("Dev posts in May:"));
-			devposts.add(new Month(6, 2015),getData("Dev posts in June:"));
-			devposts.add(new Month(7, 2015),getData("Dev posts in July:"));
-			devposts.add(new Month(8, 2015),getData("Dev posts in August:"));
-			devposts.add(new Month(9, 2015),getData("Dev posts in September:"));
-			devposts.add(new Month(10, 2015),getData("Dev posts in October:"));
-			devposts.add(new Month(11, 2015),getData("Dev posts in November:"));
-			devposts.add(new Month(12, 2015),getData("Dev posts in December:"));
+			for(int i=1; i<13; ++i)
+			{
+				posts.add(createSeriesDataItem(i,"posts"));
+				devposts.add(createSeriesDataItem(i, "devposts"));
+			}
 		
 			TimeSeriesCollection dataset = new TimeSeriesCollection();
 			dataset.addSeries(books);
@@ -104,6 +84,18 @@ public class YearPlotter implements MainTask{
 		System.out.println("All green");
 	}
 	
+	private TimeSeriesDataItem createSeriesDataItem(int monthN, String name)
+	{
+		try
+		{
+		return new TimeSeriesDataItem(new Month(monthN, 2015),getData(name));
+		}
+		catch(IOException e)
+		{
+			System.out.println(e);
+			return new TimeSeriesDataItem(new Month(monthN,2015), 0.0);
+		}
+	}
 	
 	private int getData(String dataName) throws IOException
 	{
