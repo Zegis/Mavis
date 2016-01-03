@@ -86,14 +86,15 @@ public class YearPlotter implements MainTask{
 	
 	private TimeSeriesDataItem createSeriesDataItem(int monthN, String name)
 	{
+		Month currentMonth = new Month(monthN,2015);
 		try
 		{
-		return new TimeSeriesDataItem(new Month(monthN, 2015),getData(name));
+		return new TimeSeriesDataItem(currentMonth,getData(name + " in " + currentMonth));
 		}
 		catch(IOException e)
 		{
 			System.out.println(e);
-			return new TimeSeriesDataItem(new Month(monthN,2015), 0.0);
+			return new TimeSeriesDataItem(currentMonth, 0.0);
 		}
 	}
 	
