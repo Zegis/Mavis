@@ -51,11 +51,12 @@ public class YearPlotter implements MainTask{
 			
 			TimeSeries posts = new TimeSeries("Posts");
 			TimeSeries devposts = new TimeSeries("Dev blogs");
-			
+			Month currentMonth;
 			for(int i=1; i<13; ++i)
 			{
-				posts.add(createSeriesDataItem(i,"posts"));
-				devposts.add(createSeriesDataItem(i, "devposts"));
+				currentMonth = new Month(i,2015);
+				posts.add(createSeriesDataItem(currentMonth,"posts"));
+				devposts.add(createSeriesDataItem(currentMonth, "devposts"));
 			}
 		
 			TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -84,12 +85,11 @@ public class YearPlotter implements MainTask{
 		System.out.println("All green");
 	}
 	
-	private TimeSeriesDataItem createSeriesDataItem(int monthN, String name)
+	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name)
 	{
-		Month currentMonth = new Month(monthN,2015);
 		try
 		{
-		return new TimeSeriesDataItem(currentMonth,getData(name + " in " + currentMonth));
+			return new TimeSeriesDataItem(currentMonth,getData(name + " in " + currentMonth));
 		}
 		catch(IOException e)
 		{
