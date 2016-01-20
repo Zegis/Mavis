@@ -93,7 +93,7 @@ public class ArgumentParser {
 				}
 				else if(args[i].equalsIgnoreCase("-y"))
 				{
-					options.put("yeartoplot", args[i+1]);
+					options.put("yeartoPlot", args[i+1]);
 					i+=2;
 				}
 				else

@@ -2,6 +2,7 @@ package pl.kofun.mavis;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class YearPlotter implements MainTask{
 
 	private LinesCounter booksFileCounter;
 	private LinesCounter gamesFileCounter;
+	int yearToPlot;
 	
 	public YearPlotter(Hashtable<String, String> options)
 	{
@@ -25,6 +27,15 @@ public class YearPlotter implements MainTask{
 		{
 			booksFileCounter = new LinesCounter(options.get("booksfileName"));
 			gamesFileCounter = new LinesCounter(options.get("gamesfileName"));
+		}
+		
+		if(options.containsKey("yeartoPlot"))
+		{
+			yearToPlot = Integer.parseInt(options.get("yeartoPlot"));
+		}
+		else
+		{
+			yearToPlot = Calendar.getInstance().get(Calendar.YEAR);
 		}
 	}
 	
@@ -41,8 +52,8 @@ public class YearPlotter implements MainTask{
 			
 			for(int i=1; i<13; ++i)
 			{
-				Month currentMonth = new Month(i,2015);
-				String filterForCurrentMonth = filterMaker.makeFilter(i-1,2015);
+				Month currentMonth = new Month(i,yearToPlot);
+				String filterForCurrentMonth = filterMaker.makeFilter(i-1,yearToPlot);
 				
 				books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
 				games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
