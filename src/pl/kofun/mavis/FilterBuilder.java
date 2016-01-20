@@ -36,6 +36,13 @@ public class FilterBuilder {
 		return filter;
 	}
 	
+	public String makeFilter(int currentMonth, int currentYear)
+	{
+		filter = monthFilterPart(currentMonth) + yearFilterPart(currentYear);
+		
+		return filter;
+	}
+	
 	public String monthFilterPart(int monthNumber)
 	{
 		DateFormatSymbols dateSymbols = new DateFormatSymbols(locale);
@@ -48,6 +55,18 @@ public class FilterBuilder {
 		DateFormat dateFormat = new SimpleDateFormat("yy");
 		
 		return ( dateFormat.format(Calendar.getInstance().getTime()) + ")" );
+	}
+	
+	public String yearFilterPart(int year)
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yy");
+		Calendar calendar = Calendar.getInstance();
+		
+		int yearOffset = year - calendar.get(Calendar.YEAR); 
+		
+		calendar.add(Calendar.YEAR, yearOffset);
+		
+		return ( dateFormat.format(calendar.getTime()) + ")");
 	}
 	
 }

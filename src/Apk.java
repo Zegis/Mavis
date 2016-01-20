@@ -28,7 +28,7 @@ public class Apk{
 				}
 				else if (options.get("Task").equals("Yp"))
 				{
-					YearPlotter yearp = new YearPlotter();
+					YearPlotter yearp = new YearPlotter(options);
 					yearp.execute();
 				}
 				else

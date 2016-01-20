@@ -2,6 +2,8 @@ package pl.kofun.mavis;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
@@ -14,47 +16,36 @@ import org.jfree.data.time.TimeSeriesDataItem;
 
 public class YearPlotter implements MainTask{
 
+	private LinesCounter booksFileCounter;
+	private LinesCounter gamesFileCounter;
+	
+	public YearPlotter(Hashtable<String, String> options)
+	{
+		if(options.containsKey("booksfileName") && options.containsKey("gamesfileName"))
+		{
+			booksFileCounter = new LinesCounter(options.get("booksfileName"));
+			gamesFileCounter = new LinesCounter(options.get("gamesfileName"));
+		}
+	}
+	
 	@Override
 	public void execute() {
 		try
-		{
-			
-			TimeSeries books = new TimeSeries("Books");
-			
-			books.add(new Month(1, 2015),3);
-			books.add(new Month(2, 2015),5);
-			books.add(new Month(3, 2015),0);
-			books.add(new Month(4, 2015),0);
-			books.add(new Month(5, 2015),0);
-			books.add(new Month(6, 2015),0);
-			books.add(new Month(7, 2015),1);
-			books.add(new Month(8, 2015),1);
-			books.add(new Month(9, 2015),1);
-			books.add(new Month(10, 2015),1);
-			books.add(new Month(11, 2015),0);
-			books.add(new Month(12, 2015),2);
-			
-			TimeSeries games = new TimeSeries("Games");
-			
-			games.add(new Month(1, 2015),3);
-			games.add(new Month(2, 2015),0);
-			games.add(new Month(3, 2015),0);
-			games.add(new Month(4, 2015),0);
-			games.add(new Month(5, 2015),2);
-			games.add(new Month(6, 2015),0);
-			games.add(new Month(7, 2015),2);
-			games.add(new Month(8, 2015),0);
-			games.add(new Month(9, 2015),0);
-			games.add(new Month(10, 2015),1);
-			games.add(new Month(11, 2015),0);
-			games.add(new Month(12, 2015),1);
-			
+		{			
+			TimeSeries books = new TimeSeries("Books");			
+			TimeSeries games = new TimeSeries("Games");			
 			TimeSeries posts = new TimeSeries("Posts");
 			TimeSeries devposts = new TimeSeries("Dev blogs");
-			Month currentMonth;
+			
+			FilterBuilder filterMaker = new FilterBuilder();
+			
 			for(int i=1; i<13; ++i)
 			{
-				currentMonth = new Month(i,2015);
+				Month currentMonth = new Month(i,2015);
+				String filterForCurrentMonth = filterMaker.makeFilter(i-1,2015);
+				
+				books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
+				games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
 				posts.add(createSeriesDataItem(currentMonth,"posts"));
 				devposts.add(createSeriesDataItem(currentMonth, "devposts"));
 			}
@@ -83,6 +74,12 @@ public class YearPlotter implements MainTask{
 		}
 		
 		System.out.println("All green");
+	}
+	
+	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, LinesCounter counter)
+	{
+			counter.setFilter(filterForCurrentMonth);
+			return new TimeSeriesDataItem(currentMonth, counter.countLinesWithFilter());
 	}
 	
 	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name)
