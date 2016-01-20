@@ -8,6 +8,7 @@ Application that generates  data to paste in posts for my [blog](http://kofun.pl
 Right now it:
 * Generate html for unordered list of bolded book titles for "One houndred years in library" - commenting readed books series for my [personal blog](http://blog.kofun.pl). 
 * Generates basic bar chart containing books and games I've finished for the first time in my life during current month.
+* Generates line chart containing books, games finished for the first time, and wroted posts during year.
 
 ### Dependences:
 To generate monthly bar charts I use [JFreeChart](http://www.jfree.org/jfreechart/).
