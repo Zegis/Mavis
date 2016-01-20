@@ -89,7 +89,7 @@ public class LinesCounter{
 	
 	public void setFilter(String filterToApply){
 		if(!filterToApply.equals(filter))
-			filter = "(" +	filterToApply + ")";
+			filter = filterToApply;
 	}
 	
 	private void resetFile()
