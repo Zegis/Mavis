@@ -13,7 +13,7 @@ public class Library implements MainTask{
 	public Library(Hashtable<String,String> options)
 	{
 		
-		if(options.containsKey("sourcefile") && options.containsKey("targetfileName") && options.containsKey("filter"))
+		if(options.containsKey("sourcefileName") && options.containsKey("targetfileName") && options.containsKey("filter"))
 		{
 		
 			reader = new FilterLineReader(options.get("sourcefileName"), options.get("filter"));
