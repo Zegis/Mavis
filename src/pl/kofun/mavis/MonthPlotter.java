@@ -23,7 +23,26 @@ public class MonthPlotter implements MainTask{
 		
 		if(options.containsKey("booksfileName") && options.containsKey("gamesfileName"))
 		{
-			count = new LinesCounter(options.get("booksfileName"), builder.makeCurrentTimeFilter());
+			String filter;
+			if(options.containsKey("monthtoPlot"))
+			{
+				int month =  Integer.parseInt(options.get("monthtoPlot")) -1;
+				if(options.containsKey("yeartoPlot"))
+				{
+					int year = Integer.parseInt(options.get("yeartoPlot"));
+					filter = builder.makeFilter(month,year);
+				}
+				else
+				{
+					filter = builder.makeFilter(month);
+				}
+			}
+			else
+			{
+				filter = builder.makeCurrentTimeFilter();
+			}
+			
+			count = new LinesCounter(options.get("booksfileName"), filter);
 			gamesFileName = new String(options.get("gamesfileName"));
 		}
 	}
