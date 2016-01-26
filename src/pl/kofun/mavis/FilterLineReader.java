@@ -65,8 +65,6 @@ public class FilterLineReader {
 		if(ret.size() > 0)
 		{
 			moveFilterAfterString(ret.getLast());
-			
-			ret = stringAdjuster.AdjustToBookList(ret);
 		}
 		
 		return ret;
@@ -128,7 +126,6 @@ public class FilterLineReader {
 					
 					newContent += currLine + '\n';
 				}
-				System.out.println("Trying to move filter: ");
 				file.setLength(0);
 				file.seek(0);
 				file.writeBytes(newContent);

@@ -15,7 +15,12 @@ public class stringAdjuster {
 		{
 			lineForRet.append("<strong>");
 			lineForRet.append(listToAdjust.removeFirst());
-			lineForRet.append("</strong> - \n");
+			lineForRet.append("</strong> -");
+			
+			if(listToAdjust.size()!=0)
+			{
+				lineForRet.append("\n\n");
+			}
 			
 			ret.add(lineForRet.toString());
 			lineForRet.setLength(0);

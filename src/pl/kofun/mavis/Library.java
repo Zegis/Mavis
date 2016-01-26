@@ -36,6 +36,7 @@ public class Library implements MainTask{
 	public void execute()
 	{
 		LinkedList<String> books = reader.getLinesAfterFilterAndMoveIt(20);
+		books = stringAdjuster.AdjustToBookList(books);
 		
 		try
 		{
