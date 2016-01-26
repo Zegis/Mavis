@@ -54,10 +54,10 @@ public class MonthPlotter implements MainTask{
 		dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
 		
 		count.setFileToAccess(gamesFileName);
+		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 		
 		try
 		{
-			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 			dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");

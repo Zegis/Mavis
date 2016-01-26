@@ -126,6 +126,7 @@ public class FilterLineReader {
 					
 					newContent += currLine + '\n';
 				}
+				newContent = newContent.substring(0, newContent.length()-1);
 				file.setLength(0);
 				file.seek(0);
 				file.writeBytes(newContent);
