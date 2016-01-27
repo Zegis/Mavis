@@ -63,13 +63,20 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
-		
 			ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
+			
 			System.out.print("All green");
 		}catch(IOException e)
 		{
 			System.out.println(e);
 		}
+	}
+	
+	private String createChartName()
+	{
+		String ret = "chart.jpg";
+		
+		return ret;
 	}
 	
 	private int getData(String dataName) throws IOException

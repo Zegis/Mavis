@@ -1,5 +1,8 @@
 package pl.kofun.mavis;
 
+
+import pl.kofun.mavis.utils.stringAdjuster;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Hashtable;
