@@ -67,10 +67,10 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
-			createChartName();
+			String chartName = createChartName();
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
-			ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
+			ChartUtilities.saveChartAsJPEG(new File(chartName), chart, 500, 300);
 			
 			System.out.print("All green");
 		}catch(IOException e)
@@ -81,17 +81,30 @@ public class MonthPlotter implements MainTask{
 	
 	private String createChartName()
 	{
-		String ret = "chart.jpg";
+		StringBuilder chartName = new StringBuilder();
+		chartName.append("chart");
 		
-		DateFormat format = new SimpleDateFormat("MM");
-		String monthString = format.format(Calendar.getInstance().getTime());
+		DateFormat monthFormat = new SimpleDateFormat("MM");
+		DateFormat yearFormat = new SimpleDateFormat("YYYY");
+		
+		int yearOfFirstPlot = 2013;
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		String monthString = monthFormat.format(calendar.getTime());
+		String yearString = yearFormat.format(calendar.getTime());
 		
 		int monthNumber = Integer.parseInt(monthString);
-		
+		int seriesNumber = Integer.parseInt(yearString) - yearOfFirstPlot;
 		
 		monthString = romanNumbers.intToRoman(monthNumber);
 		
-		return ret;
+		chartName.append(seriesNumber);
+		chartName.append(monthString);
+		
+		chartName.append(".jpg");
+		
+		return chartName.toString();
 	}
 	
 	private int getData(String dataName) throws IOException
