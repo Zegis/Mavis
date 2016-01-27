@@ -2,6 +2,9 @@ package pl.kofun.mavis;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -10,6 +13,8 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import pl.kofun.mavis.utils.romanNumbers;
 
 public class MonthPlotter implements MainTask{
 
@@ -62,6 +67,8 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
+			createChartName();
+			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
 			ChartUtilities.saveChartAsJPEG(new File("chart.jpg"), chart, 500, 300);
 			
@@ -75,6 +82,14 @@ public class MonthPlotter implements MainTask{
 	private String createChartName()
 	{
 		String ret = "chart.jpg";
+		
+		DateFormat format = new SimpleDateFormat("MM");
+		String monthString = format.format(Calendar.getInstance().getTime());
+		
+		int monthNumber = Integer.parseInt(monthString);
+		
+		
+		monthString = romanNumbers.intToRoman(monthNumber);
 		
 		return ret;
 	}
