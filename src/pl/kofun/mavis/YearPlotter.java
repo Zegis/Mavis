@@ -15,6 +15,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import pl.kofun.mavis.utils.fileNameCreator;
+
 public class YearPlotter implements MainTask{
 
 	private LinesCounter booksFileCounter;
@@ -77,7 +79,9 @@ public class YearPlotter implements MainTask{
 					false
 					);
 			
-			ChartUtilities.saveChartAsJPEG(new File("Year.jpg"), chart, 500, 300);
+			String chartFilename = fileNameCreator.yearChart(yearToPlot);
+			
+			ChartUtilities.saveChartAsJPEG(new File(chartFilename), chart, 500, 300);
 			
 		}catch(IOException e)
 		{

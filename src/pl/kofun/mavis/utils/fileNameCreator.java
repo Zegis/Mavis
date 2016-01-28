@@ -34,4 +34,14 @@ public class fileNameCreator {
 		return chartName.toString();
 	}
 	
+	public static String yearChart(int yeartoPlot)
+	{
+		StringBuilder chartName = new StringBuilder();
+		chartName.append("year");		
+		chartName.append(yeartoPlot);		
+		chartName.append(".jpg");
+		
+		return chartName.toString();
+	}
+	
 }
