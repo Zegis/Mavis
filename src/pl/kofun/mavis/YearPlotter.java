@@ -70,7 +70,7 @@ public class YearPlotter implements MainTask{
 			dataset.addSeries(devposts);
 			
 			JFreeChart chart = ChartFactory.createTimeSeriesChart(
-					"2015",
+					String.valueOf(yearToPlot),
 					"Month",
 					"Quantity",
 					dataset,
