@@ -2,8 +2,6 @@ package pl.kofun.mavis;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -11,17 +9,22 @@ import java.util.Scanner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import pl.kofun.mavis.utils.fileNameCreator;
-import pl.kofun.mavis.utils.romanNumbers;
 
 public class MonthPlotter implements MainTask{
 
 	private FilterBuilder builder;
 	private LinesCounter count;
 	private String gamesFileName;
+	
+	private int month;
+	private int year;
 	
 	public MonthPlotter(Hashtable<String, String> options)
 	{
@@ -32,21 +35,22 @@ public class MonthPlotter implements MainTask{
 			String filter;
 			if(options.containsKey("monthtoPlot"))
 			{
-				int month =  Integer.parseInt(options.get("monthtoPlot")) -1;
-				if(options.containsKey("yeartoPlot"))
-				{
-					int year = Integer.parseInt(options.get("yeartoPlot"));
-					filter = builder.makeFilter(month,year);
-				}
-				else
-				{
-					filter = builder.makeFilter(month);
-				}
+				month =  Integer.parseInt(options.get("monthtoPlot")) -1;
 			}
 			else
 			{
-				filter = builder.makeCurrentTimeFilter();
+				month = Calendar.getInstance().get(Calendar.MONTH);
 			}
+			if(options.containsKey("yeartoPlot"))
+			{
+				year = Integer.parseInt(options.get("yeartoPlot"));
+			}
+			else
+			{
+				year = Calendar.getInstance().get(Calendar.YEAR);
+			}
+			
+			filter = builder.makeFilter(month,year);
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
 			gamesFileName = new String(options.get("gamesfileName"));
@@ -70,10 +74,15 @@ public class MonthPlotter implements MainTask{
 			
 			String chartName = fileNameCreator.monthChart();
 			
-			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, true, false);
+			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
+			
+			CategoryPlot plot = chart.getCategoryPlot();
+			NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();			
+			rangeAxis.setTickUnit(new NumberTickUnit(1));
+			
 			ChartUtilities.saveChartAsJPEG(new File(chartName), chart, 500, 300);
 			
-			System.out.print("All green");
+			System.out.print("\nAll green");
 		}catch(IOException e)
 		{
 			System.out.println(e);
