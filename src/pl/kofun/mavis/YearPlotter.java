@@ -22,6 +22,7 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.fileNameCreator;
 
 public class YearPlotter implements MainTask{

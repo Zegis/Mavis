@@ -15,6 +15,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.fileNameCreator;
 
 public class MonthPlotter implements MainTask{
