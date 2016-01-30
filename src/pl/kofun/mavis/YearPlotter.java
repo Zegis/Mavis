@@ -2,6 +2,7 @@ package pl.kofun.mavis;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -10,6 +11,12 @@ import java.util.Scanner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickUnit;
+import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -80,6 +87,16 @@ public class YearPlotter implements MainTask{
 					);
 			
 			String chartFilename = fileNameCreator.yearChart(yearToPlot);
+			
+			XYPlot plot = chart.getXYPlot();
+			NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
+			yaxis.setTickUnit(new NumberTickUnit(1));
+			
+			DateAxis xaxis = (DateAxis) plot.getDomainAxis();
+			
+			xaxis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1));
+			xaxis.setDateFormatOverride(new SimpleDateFormat("MMM"));
+			
 			
 			ChartUtilities.saveChartAsJPEG(new File(chartFilename), chart, 500, 300);
 			
