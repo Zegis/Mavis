@@ -73,7 +73,7 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
-			String chartName = fileNameCreator.monthChart();
+			String chartName = fileNameCreator.monthChart(month, year);
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
 			

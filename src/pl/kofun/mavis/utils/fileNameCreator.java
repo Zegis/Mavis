@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 public class fileNameCreator {
 
-	public static String monthChart()
+	public static String monthChart(int monthToplot, int yearToplot)
 	{
 		StringBuilder chartName = new StringBuilder();
 		
@@ -24,20 +24,12 @@ public class fileNameCreator {
 		
 		chartName.append("chart");
 		
-		DateFormat monthFormat = new SimpleDateFormat("MM");
-		DateFormat yearFormat = new SimpleDateFormat("YYYY");
-		
 		int yearOfFirstPlot = 2013;
 		
-		Calendar calendar = Calendar.getInstance();
 		
-		String monthString = monthFormat.format(calendar.getTime());
-		String yearString = yearFormat.format(calendar.getTime());
+		int seriesNumber = yearToplot - yearOfFirstPlot;
 		
-		int monthNumber = Integer.parseInt(monthString);
-		int seriesNumber = Integer.parseInt(yearString) - yearOfFirstPlot;
-		
-		monthString = romanNumbers.intToRoman(monthNumber);
+		String monthString = romanNumbers.intToRoman(monthToplot);
 		
 		chartName.append(seriesNumber);
 		chartName.append(monthString);
