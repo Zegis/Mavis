@@ -12,6 +12,9 @@ public class fileNameCreator {
 
 	public static String monthChart(int monthToplot, int yearToplot)
 	{
+		// Because MonthPlotter passes value from range 0-11
+		++monthToplot;
+		
 		StringBuilder chartName = new StringBuilder();
 		
 		String folder = getFolder("monthly");
