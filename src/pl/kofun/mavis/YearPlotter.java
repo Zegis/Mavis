@@ -56,7 +56,7 @@ public class YearPlotter implements MainTask{
 			TimeSeries books = new TimeSeries("Books");			
 			TimeSeries games = new TimeSeries("Games");			
 			TimeSeries posts = new TimeSeries("Posts");
-			TimeSeries devposts = new TimeSeries("Dev blogs");
+			TimeSeries devposts = new TimeSeries("Dev posts");
 			
 			FilterBuilder filterMaker = new FilterBuilder();
 			
