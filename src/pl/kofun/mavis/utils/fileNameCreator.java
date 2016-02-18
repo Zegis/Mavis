@@ -4,9 +4,6 @@ import java.nio.file.Path;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class fileNameCreator {
 
@@ -42,7 +39,7 @@ public class fileNameCreator {
 		return chartName.toString();
 	}
 	
-	public static String getFolder(String folderName)
+	private static String getFolder(String folderName)
 	{
 		Path path = Paths.get(folderName);
 		if(Files.notExists(path))
