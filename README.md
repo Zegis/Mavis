@@ -14,5 +14,6 @@ Right now it:
 To generate various charts I use [JFreeChart](http://www.jfree.org/jfreechart/).
 
 ###Dev posts related to project:
+* [Creating timeseries charts with jFreeChart](http://kofun.pl/tools/creating-timeseries-chart-with-jfreechart/)
 * [Creating bar charts with jFreeChart](http://kofun.pl/tools/creating-bar-chart-with-jfreechart/)
 * [How I configurated travis.ci for Mavis?](http://kofun.pl/various/using-trvis-ci-with-java-eclipse-project/)
