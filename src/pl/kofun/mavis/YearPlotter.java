@@ -23,7 +23,8 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
 import pl.kofun.mavis.utils.FilterBuilder;
-import pl.kofun.mavis.utils.fileNameCreator;
+import pl.kofun.mavis.utils.monthFileNameCreator;
+import pl.kofun.mavis.utils.yearFileNameCreator;
 
 public class YearPlotter implements MainTask{
 
@@ -87,7 +88,7 @@ public class YearPlotter implements MainTask{
 					false
 					);
 			
-			String chartFilename = fileNameCreator.yearChart(yearToPlot);
+			String chartFilename = yearFileNameCreator.yearChart(yearToPlot);
 			
 			XYPlot plot = chart.getXYPlot();
 			NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();

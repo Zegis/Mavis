@@ -16,7 +16,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import pl.kofun.mavis.utils.FilterBuilder;
-import pl.kofun.mavis.utils.fileNameCreator;
+import pl.kofun.mavis.utils.monthFileNameCreator;
 
 public class MonthPlotter implements MainTask{
 
@@ -73,7 +73,7 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
-			String chartName = fileNameCreator.monthChart(month, year);
+			String chartName = monthFileNameCreator.monthChart(month, year);
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
 			
