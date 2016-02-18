@@ -8,45 +8,44 @@ public class Apk{
 
 	public static void main(String args[]) throws IOException
 	{		
+		MainTask task;
 		if(args.length > 0)
 		{
 			ArgumentParser parser = new ArgumentParser();
 			Hashtable<String, String> options = parser.parseArguments(args);
 			
+			
+			
 			if(options.containsKey("Task"))
 			{
 				if(options.get("Task").equals("Ohil"))
 				{
-					Library Ohil = new Library(options);
-					
-					Ohil.execute();
+					task = new Library(options);
 				}
 				else if(options.get("Task").equals("Mp"))
 				{
-					MonthPlotter mp = new MonthPlotter(options);
-					mp.execute();
+					task = new MonthPlotter(options);
+					
 				}
 				else if (options.get("Task").equals("Yp"))
 				{
-					YearPlotter yearp = new YearPlotter(options);
-					yearp.execute();
+					task = new YearPlotter(options);
 				}
 				else
 				{
-					IncorrectUsage();
+					task = new DefaultTask();
 				}
 			}
+			else
+			{
+				task = new DefaultTask();
+			}
+			task.execute();
 		}
 		else
 		{
-			IncorrectUsage();
+			task = new DefaultTask();
+			task.execute();
 		} 
-	}
-	
-	public static void IncorrectUsage(){
-		
-		System.out.println("Usage:");
-		System.out.println("Mavis [cmd] (options)!");
-		System.out.println("Available cmd: Ohil and Mp");
 	}
 }
