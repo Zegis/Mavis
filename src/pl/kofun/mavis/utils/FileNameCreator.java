@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FileNameCreator {
+public abstract class FileNameCreator {
 
 	protected static String getFolder(String folderName) {
 		Path path = Paths.get(folderName);
@@ -24,4 +24,10 @@ public class FileNameCreator {
 		}
 	}
 
+	public abstract String createName(int month, int year);
+	
+	public abstract String createName(int year);
+	
+	
+	
 }

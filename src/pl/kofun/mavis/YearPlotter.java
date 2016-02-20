@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -22,15 +21,17 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
-import pl.kofun.mavis.utils.monthFileNameCreator;
 import pl.kofun.mavis.utils.yearFileNameCreator;
 
 public class YearPlotter implements MainTask{
 
 	private LinesCounter booksFileCounter;
 	private LinesCounter gamesFileCounter;
-	int yearToPlot;
+	private int yearToPlot;
+	
+	private FileNameCreator fileNameCreator;
 	
 	public YearPlotter(Hashtable<String, String> options)
 	{
@@ -48,6 +49,8 @@ public class YearPlotter implements MainTask{
 		{
 			yearToPlot = Calendar.getInstance().get(Calendar.YEAR);
 		}
+		
+		fileNameCreator = new yearFileNameCreator();
 	}
 	
 	@Override
@@ -88,7 +91,7 @@ public class YearPlotter implements MainTask{
 					false
 					);
 			
-			String chartFilename = yearFileNameCreator.yearChart(yearToPlot);
+			String chartFilename = fileNameCreator.createName(yearToPlot);
 			
 			XYPlot plot = chart.getXYPlot();
 			NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();

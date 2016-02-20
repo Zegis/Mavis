@@ -15,6 +15,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.monthFileNameCreator;
 
@@ -26,6 +27,8 @@ public class MonthPlotter implements MainTask{
 	
 	private int month;
 	private int year;
+	
+	private FileNameCreator fileNameCreator;
 	
 	public MonthPlotter(Hashtable<String, String> options)
 	{
@@ -55,6 +58,8 @@ public class MonthPlotter implements MainTask{
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
 			gamesFileName = new String(options.get("gamesfileName"));
+			
+			fileNameCreator = new monthFileNameCreator();
 		}
 	}
 	
@@ -73,7 +78,7 @@ public class MonthPlotter implements MainTask{
 			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 			
-			String chartName = monthFileNameCreator.monthChart(month, year);
+			String chartName = fileNameCreator.createName(month, year);
 			
 			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
 			

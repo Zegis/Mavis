@@ -2,7 +2,7 @@ package pl.kofun.mavis.utils;
 
 public class yearFileNameCreator extends FileNameCreator {
 	
-	public static String yearChart(int yeartoPlot)
+	public String createName(int yeartoPlot)
 	{
 		StringBuilder chartName = new StringBuilder();
 		
@@ -19,6 +19,11 @@ public class yearFileNameCreator extends FileNameCreator {
 		chartName.append(".jpg");
 		
 		return chartName.toString();
+	}
+
+	@Override
+	public String createName(int month, int year) {
+		return createName(year);
 	}
 }
 
