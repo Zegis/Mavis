@@ -2,7 +2,7 @@ package pl.kofun.mavis;
 
 import java.util.Hashtable;
 
-public class ArgumentParser {
+public class ArgumentParser{
 
 	Hashtable<String, String> options;
 	

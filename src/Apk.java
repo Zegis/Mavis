@@ -1,8 +1,12 @@
 import java.io.IOException;
 import java.util.Hashtable;
 
-
-import pl.kofun.mavis.*;
+import pl.kofun.mavis.ArgumentParser;
+import pl.kofun.mavis.DefaultTask;
+import pl.kofun.mavis.Library;
+import pl.kofun.mavis.MainTask;
+import pl.kofun.mavis.MonthPlotter;
+import pl.kofun.mavis.YearPlotter;
 
 public class Apk{
 
@@ -25,7 +29,6 @@ public class Apk{
 				else if(options.get("Task").equals("Mp"))
 				{
 					task = new MonthPlotter(options);
-					
 				}
 				else if (options.get("Task").equals("Yp"))
 				{
