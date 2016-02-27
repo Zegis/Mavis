@@ -2,7 +2,7 @@ package pl.kofun.mavis;
 
 import java.util.Hashtable;
 
-public class ArgumentParser{
+public class ArgumentParser implements Parser{
 
 	Hashtable<String, String> options;
 	
@@ -11,7 +11,12 @@ public class ArgumentParser{
 		options = new Hashtable<String,String>();
 	}
 	
-	public Hashtable<String, String> parseArguments(String args[])
+	public Hashtable<String,String> parse(String args[])
+	{
+		return parseArguments(args);
+	}
+	
+	private Hashtable<String, String> parseArguments(String args[])
 	{		
 		if(args.length > 0)
 		{
