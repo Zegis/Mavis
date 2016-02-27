@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
@@ -33,7 +32,7 @@ public class YearPlotter implements MainTask{
 	
 	private FileNameCreator fileNameCreator;
 	
-	public YearPlotter(Hashtable<String, String> options)
+	public YearPlotter(Options options)
 	{
 		if(options.containsKey("booksfileName") && options.containsKey("gamesfileName"))
 		{

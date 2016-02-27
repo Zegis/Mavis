@@ -3,7 +3,6 @@ package pl.kofun.mavis;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
@@ -30,7 +29,7 @@ public class MonthPlotter implements MainTask{
 	
 	private FileNameCreator fileNameCreator;
 	
-	public MonthPlotter(Hashtable<String, String> options)
+	public MonthPlotter(Options options)
 	{
 		builder = new FilterBuilder();
 		

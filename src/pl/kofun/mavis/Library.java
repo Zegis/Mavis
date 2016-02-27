@@ -5,7 +5,6 @@ import pl.kofun.mavis.utils.stringAdjuster;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Hashtable;
 import java.util.LinkedList;
 
 public class Library implements MainTask{
@@ -13,7 +12,7 @@ public class Library implements MainTask{
 	private FilterLineReader reader;
 	private RandomAccessFile savefile;
 	
-	public Library(Hashtable<String,String> options)
+	public Library(Options options)
 	{
 		
 		if(options.containsKey("sourcefileName") && options.containsKey("targetfileName") && options.containsKey("filter"))

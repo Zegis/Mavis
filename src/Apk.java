@@ -1,12 +1,11 @@
 import java.io.IOException;
-import java.util.Hashtable;
 
-import pl.kofun.mavis.ArgumentParser;
 import pl.kofun.mavis.DefaultTask;
 import pl.kofun.mavis.Library;
 import pl.kofun.mavis.MainTask;
 import pl.kofun.mavis.MonthPlotter;
 import pl.kofun.mavis.YearPlotter;
+import pl.kofun.mavis.Options;
 
 public class Apk{
 
@@ -15,10 +14,7 @@ public class Apk{
 		MainTask task;
 		if(args.length > 0)
 		{
-			ArgumentParser parser = new ArgumentParser();
-			Hashtable<String, String> options = parser.parseArguments(args);
-			
-			
+			Options options = new Options(args);			
 			
 			if(options.containsKey("Task"))
 			{
