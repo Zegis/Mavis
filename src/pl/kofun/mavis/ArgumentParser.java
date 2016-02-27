@@ -2,7 +2,7 @@ package pl.kofun.mavis;
 
 import java.util.Hashtable;
 
-public class ArgumentParser implements Parser{
+public class ArgumentParser implements OptionsStream{
 
 	Hashtable<String, String> options;
 	
@@ -11,9 +11,15 @@ public class ArgumentParser implements Parser{
 		options = new Hashtable<String,String>();
 	}
 	
-	public Hashtable<String,String> parse(String args[])
+	public Hashtable<String,String> load(String args[])
 	{
 		return parseArguments(args);
+	}
+	
+	// It's impossible to save options into command line
+	public boolean save(Hashtable<String,String> optionsToSave)
+	{
+		return false;
 	}
 	
 	private Hashtable<String, String> parseArguments(String args[])
@@ -25,7 +31,7 @@ public class ArgumentParser implements Parser{
 			switch(args[0])
 			{
 			case "Ohil": parseLibraryArguments(args); break;
-			case "Mp": parseMonthPlotterArguments(args); break;
+			case "Mp": parseMonthPlotterArguments(args);
 			case "Yp": parseYearPlotterArguments(args); break;
 			default: incorrectTask(); break;
 			}
@@ -52,24 +58,9 @@ public class ArgumentParser implements Parser{
 		{
 			for(int i=1; i<args.length;)
 			{
-				if(args[i].equalsIgnoreCase("-b"))
-				{
-					options.put("booksfileName", args[i+1]);
-					i+=2;
-				}
-				else if(args[i].equalsIgnoreCase("-g"))
-				{
-					options.put("gamesfileName", args[i+1]);
-					i+=2;
-				}
-				else if(args[i].equalsIgnoreCase("-m"))
+				if(args[i].equalsIgnoreCase("-m"))
 				{
 					options.put("monthtoPlot", args[i+1]);
-					i+=2;
-				}
-				else if(args[i].equalsIgnoreCase("-y"))
-				{
-					options.put("yeartoPlot", args[i+1]);
 					i+=2;
 				}
 				else

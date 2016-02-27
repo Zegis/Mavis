@@ -5,12 +5,12 @@ import java.util.Hashtable;
 public class Options {
 
 	private Hashtable<String, String> options;
-	private Parser parser;
+	private OptionsStream parser;
 	
 	public Options(String[] args)
 	{
 		parser = new ArgumentParser();
-		options = parser.parse(args);
+		options = parser.load(args);
 	}
 	
 	public String get(String key)
