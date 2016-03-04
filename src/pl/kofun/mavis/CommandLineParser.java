@@ -2,11 +2,11 @@ package pl.kofun.mavis;
 
 import java.util.Hashtable;
 
-public class ArgumentParser implements OptionsStream{
+public class CommandLineParser implements OptionsParser{
 
 	Hashtable<String, String> options;
 	
-	public ArgumentParser()
+	public CommandLineParser()
 	{
 		options = new Hashtable<String,String>();
 	}
@@ -14,12 +14,6 @@ public class ArgumentParser implements OptionsStream{
 	public Hashtable<String,String> load(String args[])
 	{
 		return parseArguments(args);
-	}
-	
-	// It's impossible to save options into command line
-	public boolean save(Hashtable<String,String> optionsToSave)
-	{
-		return false;
 	}
 	
 	private Hashtable<String, String> parseArguments(String args[])
