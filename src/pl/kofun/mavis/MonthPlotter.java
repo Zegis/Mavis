@@ -14,6 +14,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.monthFileNameCreator;

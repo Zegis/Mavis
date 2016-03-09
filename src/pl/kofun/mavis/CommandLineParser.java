@@ -2,6 +2,8 @@ package pl.kofun.mavis;
 
 import java.util.Hashtable;
 
+import pl.kofun.mavis.Interfaces.OptionsParser;
+
 public class CommandLineParser implements OptionsParser{
 
 	Hashtable<String, String> options;

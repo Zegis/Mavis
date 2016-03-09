@@ -1,8 +1,8 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.Interfaces;
 
 import java.util.Hashtable;
 
-interface OptionsParser {
+public interface OptionsParser {
 
 	public Hashtable<String, String> load(String[] args);	
 }

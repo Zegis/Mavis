@@ -1,5 +1,7 @@
 package pl.kofun.mavis;
 
+import pl.kofun.mavis.Interfaces.MainTask;
+
 public class DefaultTask implements MainTask {
 
 	@Override

@@ -1,6 +1,7 @@
 package pl.kofun.mavis;
 
 
+import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.utils.stringAdjuster;
 
 import java.io.IOException;

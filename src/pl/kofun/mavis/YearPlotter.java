@@ -20,6 +20,7 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.yearFileNameCreator;

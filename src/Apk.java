@@ -2,9 +2,9 @@ import java.io.IOException;
 
 import pl.kofun.mavis.DefaultTask;
 import pl.kofun.mavis.Library;
-import pl.kofun.mavis.MainTask;
 import pl.kofun.mavis.MonthPlotter;
 import pl.kofun.mavis.YearPlotter;
+import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.Options;
 
 public class Apk{

@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.Interfaces;
 
 public interface MainTask {
 
