@@ -13,6 +13,11 @@ public class CommandLineParser implements OptionsParser{
 		options = new Hashtable<String,String>();
 	}
 	
+	public CommandLineParser(Hashtable<String,String> opt)
+	{
+		options = opt;
+	}
+	
 	public Hashtable<String,String> load(String args[])
 	{
 		return parseArguments(args);
@@ -162,6 +167,5 @@ public class CommandLineParser implements OptionsParser{
 		System.out.println("-s                       defines source filename");
 		System.out.println("-t                       defines target filename");
 		System.out.println("-f                       filter to use");
-	}
-	
+	}	
 }

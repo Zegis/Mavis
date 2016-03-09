@@ -7,9 +7,11 @@ import pl.kofun.mavis.Interfaces.OptionsSaver;
 public class FileSaver implements OptionsSaver {
 
 	@Override
-	public void save(Hashtable<String, String> options) {
+	public Hashtable<String, String> save(Hashtable<String, String> options) {
 		// TODO Auto-generated method stub
 
+		return options;
+		
 	}
 
 }

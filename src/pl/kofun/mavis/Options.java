@@ -13,8 +13,19 @@ public class Options {
 	
 	public Options(String[] args)
 	{
-		parser = new CommandLineParser();
-		options = parser.load(args);
+		options = loadDefaults();
+		
+		parser = new CommandLineParser(options);
+		parser.load(args);
+		
+		saver = new FileSaver();
+	}
+
+	private Hashtable<String, String> loadDefaults()
+	{
+		parser = new FileParser();
+		
+		return parser.load();
 	}
 	
 	public String get(String key)

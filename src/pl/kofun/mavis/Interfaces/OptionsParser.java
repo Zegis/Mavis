@@ -4,5 +4,5 @@ import java.util.Hashtable;
 
 public interface OptionsParser {
 
-	public Hashtable<String, String> load(String[] args);	
+	public Hashtable<String, String> load(String... args);
 }
