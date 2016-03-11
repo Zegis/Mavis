@@ -1,5 +1,11 @@
 package pl.kofun.mavis;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 import java.util.Optional;
 
@@ -34,6 +40,38 @@ public class FileParser implements OptionsParser {
 		else
 		{
 			fileName = fileNameCreator.createName(Optional.empty());
+		}
+		
+		try
+		{
+			FileInputStream inputStream = new FileInputStream(fileName);
+			BufferedReader filereader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+			String currentLine;
+			while( (currentLine = filereader.readLine()) != null)
+			{
+				if(currentLine.contains(" : "))
+				{
+					String[] optionsString = currentLine.split(" : ", 2);
+					_options.put(optionsString[0], optionsString[1]);
+				}
+					
+			}
+			filereader.close();
+		}
+		catch(UnsupportedEncodingException ex)
+		{
+			System.out.print("Cant open file with UTF-8!");
+		}
+		catch(FileNotFoundException ex)
+		{
+			if(fileName == fileNameCreator.createName(Optional.empty()))
+				System.out.println("Can't find default config!");
+			else
+				System.out.println("Unable to open given save file");
+		}
+		catch(IOException ex)
+		{
+			System.out.println(ex.getMessage());
 		}
 		
 		return _options;

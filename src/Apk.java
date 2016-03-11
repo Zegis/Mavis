@@ -12,39 +12,31 @@ public class Apk{
 	public static void main(String args[]) throws IOException
 	{		
 		MainTask task;
-		if(args.length > 0)
-		{
-			Options options = new Options(args);			
+		Options options = new Options(args);			
 			
-			if(options.containsKey("Task"))
+		if(options.containsKey("Task"))
+		{
+			if(options.get("Task").equals("Ohil"))
 			{
-				if(options.get("Task").equals("Ohil"))
-				{
-					task = new Library(options);
-				}
-				else if(options.get("Task").equals("Mp"))
-				{
-					task = new MonthPlotter(options);
-				}
-				else if (options.get("Task").equals("Yp"))
-				{
-					task = new YearPlotter(options);
-				}
-				else
-				{
-					task = new DefaultTask();
-				}
+				task = new Library(options);
+			}
+			else if(options.get("Task").equals("Mp"))
+			{
+				task = new MonthPlotter(options);
+			}
+			else if (options.get("Task").equals("Yp"))
+			{
+				task = new YearPlotter(options);
 			}
 			else
 			{
 				task = new DefaultTask();
 			}
-			task.execute();
 		}
 		else
 		{
 			task = new DefaultTask();
-			task.execute();
-		} 
+		}
+		task.execute();
 	}
 }

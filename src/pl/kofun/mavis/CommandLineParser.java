@@ -18,7 +18,7 @@ public class CommandLineParser implements OptionsParser{
 		options = opt;
 	}
 	
-	public Hashtable<String,String> load(String args[])
+	public Hashtable<String,String> load(String... args)
 	{
 		return parseArguments(args);
 	}
