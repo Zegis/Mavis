@@ -64,7 +64,7 @@ public class FileParser implements OptionsParser {
 		}
 		catch(FileNotFoundException ex)
 		{
-			if(fileName == fileNameCreator.createName(Optional.empty()))
+			if(fileName.equals(fileNameCreator.createName(Optional.empty())))
 				System.out.println("Can't find default config!");
 			else
 				System.out.println("Unable to open given save file");
