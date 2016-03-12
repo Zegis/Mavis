@@ -65,33 +65,39 @@ public class MonthPlotter implements MainTask{
 	
 	public void execute()
 	{
-		
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
-		
-		count.setFileToAccess(gamesFileName);
-		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
-		
-		try
+		if(count != null && gamesFileName != null)
 		{
-			dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
-			dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
-			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
 			
-			String chartName = fileNameCreator.createName(month, year);
+			count.setFileToAccess(gamesFileName);
+			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 			
-			JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
-			
-			CategoryPlot plot = chart.getCategoryPlot();
-			NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();			
-			rangeAxis.setTickUnit(new NumberTickUnit(1));
-			
-			ChartUtilities.saveChartAsJPEG(new File(chartName), chart, 500, 300);
-			
-			System.out.print("\nAll green");
-		}catch(IOException e)
+			try
+			{
+				dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
+				dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
+				dataset.setValue(getData("Tasks"), "Finished", "Tasks");
+				
+				String chartName = fileNameCreator.createName(month, year);
+				
+				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
+				
+				CategoryPlot plot = chart.getCategoryPlot();
+				NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();			
+				rangeAxis.setTickUnit(new NumberTickUnit(1));
+				
+				ChartUtilities.saveChartAsJPEG(new File(chartName), chart, 500, 300);
+				
+				System.out.print("\nAll green");
+			}catch(IOException e)
+			{
+				System.out.println(e);
+			}
+		}
+		else
 		{
-			System.out.println(e);
+			this.usage();
 		}
 	}
 	
@@ -110,5 +116,16 @@ public class MonthPlotter implements MainTask{
 		
 		
 		return ret;
+	}
+
+	@Override
+	public void usage() {
+		System.out.println("For Month Plotter you must define:");
+		System.out.println("books filename as -b (argument) or booksfileName : (argument) inside txt file");
+		System.out.println("games filename as -g (argument) or gamesfileName : (argument) inside txt file");
+		System.out.println("You may want to specify");
+		System.out.println("Month to plot by -m (number) in command line");
+		System.out.println("Year to plot by -y (year) in command line");
+		
 	}
 }

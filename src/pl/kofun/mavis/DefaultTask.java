@@ -12,4 +12,9 @@ public class DefaultTask implements MainTask {
 		System.out.println("Available cmd: Ohil, Mp and Yp");
 	}
 
+	@Override
+	public void usage() {
+		this.execute();		
+	}
+
 }

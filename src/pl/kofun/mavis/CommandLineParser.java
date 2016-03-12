@@ -78,28 +78,4 @@ public class CommandLineParser implements OptionsParser{
 		
 		return options;
 	}
-	
-	private void incorrectMonthPlotterArguments()
-	{
-		System.out.println("Avilable args for Month Plotter:");
-		System.out.println("-b                       defines books filename");
-		System.out.println("-g                       defines games filename");
-		System.out.println("-m                       defines month");
-		System.out.println("-y                       defines year");
-	}
-	
-	private void incorrectYearPlotterArguments(){
-		System.out.println("Avilable args for Month Plotter:");
-		System.out.println("-b                       defines books filename");
-		System.out.println("-g                       defines games filename");
-		System.out.println("-y                       defines year for plotting");
-	}
-	
-	private void incorrectLibraryArguments()
-	{
-		System.out.println("Avilable args for Library:");
-		System.out.println("-s                       defines source filename");
-		System.out.println("-t                       defines target filename");
-		System.out.println("-f                       filter to use");
-	}	
 }

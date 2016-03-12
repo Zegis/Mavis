@@ -55,62 +55,69 @@ public class YearPlotter implements MainTask{
 	
 	@Override
 	public void execute() {
-		try
-		{			
-			TimeSeries books = new TimeSeries("Books");			
-			TimeSeries games = new TimeSeries("Games");			
-			TimeSeries posts = new TimeSeries("Posts");
-			TimeSeries devposts = new TimeSeries("Dev posts");
-			
-			FilterBuilder filterMaker = new FilterBuilder();
-			
-			for(int i=1; i<13; ++i)
-			{
-				Month currentMonth = new Month(i,yearToPlot);
-				String filterForCurrentMonth = filterMaker.makeFilter(i-1,yearToPlot);
-				
-				books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
-				games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
-				posts.add(createSeriesDataItem(currentMonth,"posts"));
-				devposts.add(createSeriesDataItem(currentMonth, "devposts"));
-			}
-		
-			TimeSeriesCollection dataset = new TimeSeriesCollection();
-			dataset.addSeries(books);
-			dataset.addSeries(games);
-			dataset.addSeries(posts);
-			dataset.addSeries(devposts);
-			
-			JFreeChart chart = ChartFactory.createTimeSeriesChart(
-					String.valueOf(yearToPlot),
-					"Month",
-					"Quantity",
-					dataset,
-					true,
-					true,
-					false
-					);
-			
-			String chartFilename = fileNameCreator.createName(yearToPlot);
-			
-			XYPlot plot = chart.getXYPlot();
-			NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
-			yaxis.setTickUnit(new NumberTickUnit(1));
-			
-			DateAxis xaxis = (DateAxis) plot.getDomainAxis();
-			
-			xaxis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1));
-			xaxis.setDateFormatOverride(new SimpleDateFormat("MMM"));
-			
-			
-			ChartUtilities.saveChartAsJPEG(new File(chartFilename), chart, 500, 300);
-			
-		}catch(IOException e)
+		if(booksFileCounter != null || gamesFileCounter != null)
 		{
-			System.out.println(e);
+			try
+			{			
+				TimeSeries books = new TimeSeries("Books");			
+				TimeSeries games = new TimeSeries("Games");			
+				TimeSeries posts = new TimeSeries("Posts");
+				TimeSeries devposts = new TimeSeries("Dev posts");
+				
+				FilterBuilder filterMaker = new FilterBuilder();
+				
+				for(int i=1; i<13; ++i)
+				{
+					Month currentMonth = new Month(i,yearToPlot);
+					String filterForCurrentMonth = filterMaker.makeFilter(i-1,yearToPlot);
+					
+					books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
+					games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
+					posts.add(createSeriesDataItem(currentMonth,"posts"));
+					devposts.add(createSeriesDataItem(currentMonth, "devposts"));
+				}
+			
+				TimeSeriesCollection dataset = new TimeSeriesCollection();
+				dataset.addSeries(books);
+				dataset.addSeries(games);
+				dataset.addSeries(posts);
+				dataset.addSeries(devposts);
+				
+				JFreeChart chart = ChartFactory.createTimeSeriesChart(
+						String.valueOf(yearToPlot),
+						"Month",
+						"Quantity",
+						dataset,
+						true,
+						true,
+						false
+						);
+				
+				String chartFilename = fileNameCreator.createName(yearToPlot);
+				
+				XYPlot plot = chart.getXYPlot();
+				NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
+				yaxis.setTickUnit(new NumberTickUnit(1));
+				
+				DateAxis xaxis = (DateAxis) plot.getDomainAxis();
+				
+				xaxis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1));
+				xaxis.setDateFormatOverride(new SimpleDateFormat("MMM"));
+				
+				
+				ChartUtilities.saveChartAsJPEG(new File(chartFilename), chart, 500, 300);
+				
+			}catch(IOException e)
+			{
+				System.out.println(e);
+			}
+			
+			System.out.println("All green");
 		}
-		
-		System.out.println("All green");
+		else
+		{
+			this.usage();
+		}
 	}
 	
 	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, LinesCounter counter)
@@ -147,5 +154,14 @@ public class YearPlotter implements MainTask{
 		
 		
 		return ret;
+	}
+
+	@Override
+	public void usage() {
+		System.out.println("For Year Plotter you must define:");
+		System.out.println("books filename as -b (argument) or booksfileName : (argument) inside txt file");
+		System.out.println("games filename as -g (argument) or gamesfileName : (argument) inside txt file");
+		System.out.println("You may want to specify");
+		System.out.println("Year to plot by -y (year) in command line");		
 	}
 }
