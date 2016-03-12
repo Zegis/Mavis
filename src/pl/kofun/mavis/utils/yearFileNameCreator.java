@@ -1,5 +1,8 @@
 package pl.kofun.mavis.utils;
 
+import java.util.Calendar;
+import java.util.Optional;
+
 public class yearFileNameCreator extends FileNameCreator {
 	
 	public String createName(int yeartoPlot)
@@ -21,9 +24,13 @@ public class yearFileNameCreator extends FileNameCreator {
 		return chartName.toString();
 	}
 
-	@Override
 	public String createName(int month, int year) {
 		return createName(year);
+	}
+
+	@Override
+	public String createName(Optional<String> name) {
+		return createName(Calendar.getInstance().get(Calendar.YEAR));
 	}
 }
 

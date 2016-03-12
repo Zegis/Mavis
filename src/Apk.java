@@ -1,54 +1,42 @@
 import java.io.IOException;
-import java.util.Hashtable;
 
-import pl.kofun.mavis.ArgumentParser;
 import pl.kofun.mavis.DefaultTask;
 import pl.kofun.mavis.Library;
-import pl.kofun.mavis.MainTask;
 import pl.kofun.mavis.MonthPlotter;
 import pl.kofun.mavis.YearPlotter;
+import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.Options;
 
 public class Apk{
 
 	public static void main(String args[]) throws IOException
 	{		
 		MainTask task;
-		if(args.length > 0)
+		Options options = new Options(args);			
+			
+		if(options.containsKey("Task"))
 		{
-			ArgumentParser parser = new ArgumentParser();
-			Hashtable<String, String> options = parser.parseArguments(args);
-			
-			
-			
-			if(options.containsKey("Task"))
+			if(options.get("Task").equals("Ohil"))
 			{
-				if(options.get("Task").equals("Ohil"))
-				{
-					task = new Library(options);
-				}
-				else if(options.get("Task").equals("Mp"))
-				{
-					task = new MonthPlotter(options);
-				}
-				else if (options.get("Task").equals("Yp"))
-				{
-					task = new YearPlotter(options);
-				}
-				else
-				{
-					task = new DefaultTask();
-				}
+				task = new Library(options);
+			}
+			else if(options.get("Task").equals("Mp"))
+			{
+				task = new MonthPlotter(options);
+			}
+			else if (options.get("Task").equals("Yp"))
+			{
+				task = new YearPlotter(options);
 			}
 			else
 			{
 				task = new DefaultTask();
 			}
-			task.execute();
 		}
 		else
 		{
 			task = new DefaultTask();
-			task.execute();
-		} 
+		}
+		task.execute();
 	}
 }

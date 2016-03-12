@@ -1,9 +1,11 @@
 package pl.kofun.mavis.utils;
 
 import java.util.Calendar;
+import java.util.Optional;
 
 public class monthFileNameCreator extends FileNameCreator{
 
+	@Override
 	public String createName(int monthToplot, int yearToplot)
 	{
 		// Because MonthPlotter passes value from range 0-11
@@ -36,8 +38,14 @@ public class monthFileNameCreator extends FileNameCreator{
 		return chartName.toString();
 	}
 	
+	@Override
 	public String createName(int monthToPlot)
 	{
 		return createName(monthToPlot, Calendar.getInstance().get(Calendar.YEAR));
+	}
+
+	@Override
+	public String createName(Optional<String> name) {
+		return createName(Calendar.getInstance().get(Calendar.MONTH));
 	}
 }
