@@ -49,14 +49,3 @@ public class FileSaver implements OptionsSaver {
 	}
 
 }
-
-/*
-	"Task"
-	"monthtoPlot", 
-	"booksfileName",
-	"gamesfileName",
-	"yeartoPlot", 
-	"sourcefileName",
-	"targetfileName",
-	"filter",
-*/ 
