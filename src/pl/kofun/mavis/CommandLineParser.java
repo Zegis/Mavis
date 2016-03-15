@@ -29,7 +29,7 @@ public class CommandLineParser implements OptionsParser{
 		{
 			options.put("Task", args[0]);
 			
-			if( (args.length-1)%2 == 0)
+			if( (args.length)%2 == 0)
 			{
 				for(int i=1; i<args.length;)
 				{
@@ -67,6 +67,16 @@ public class CommandLineParser implements OptionsParser{
 					{
 						options.put("filter", args[i+1]);
 						i+=2;
+					}
+					else if(args[i].equalsIgnoreCase("-sf"))
+					{
+						options.put("save", args[i+1]);
+						i+=2;
+					}
+					else if(args[i].equalsIgnoreCase("-d"))
+					{
+						options.put("save", "default");
+						++i;
 					}
 					else
 					{

@@ -38,5 +38,10 @@ public class Apk{
 			task = new DefaultTask();
 		}
 		task.execute();
+		
+		if(options.containsKey("save"))
+		{
+			options.save();
+		}
 	}
 }
