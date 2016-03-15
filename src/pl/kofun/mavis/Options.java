@@ -15,7 +15,13 @@ public class Options {
 	{
 		options = loadDefaults();
 		
-		parser = new CommandLineParser(options);
+		if(("-l").equalsIgnoreCase(args[0]))
+		{
+			parser = new FileParser(options);
+		}
+		else
+			parser = new CommandLineParser(options);
+		
 		parser.load(args);
 		
 		saver = new FileSaver();

@@ -32,10 +32,10 @@ public class FileParser implements OptionsParser {
 
 		FileNameCreator fileNameCreator = new saveFileNameCreator();
 		String fileName;
-		if(args.length == 1)
+		if(args.length == 2)
 		{
 			
-			fileName = fileNameCreator.createName(Optional.of(args[0]));
+			fileName = fileNameCreator.createName(Optional.of(args[1]));
 		}
 		else
 		{
@@ -67,7 +67,7 @@ public class FileParser implements OptionsParser {
 			if(fileName.equals(fileNameCreator.createName(Optional.empty())))
 				System.out.println("Can't find default config!");
 			else
-				System.out.println("Unable to open given save file");
+				System.out.println("Unable to open given save file:" + fileName);
 		}
 		catch(IOException ex)
 		{
