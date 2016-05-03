@@ -29,7 +29,7 @@ public class CommandLineParser implements OptionsParser{
 		{
 			options.put("Task", args[0]);
 			
-			if( (args.length)%2 == 0)
+			if( (args.length-1)%2 == 0)
 			{
 				for(int i=1; i<args.length;)
 				{
