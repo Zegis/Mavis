@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import pl.kofun.mavis.BlogClient;
 import pl.kofun.mavis.DefaultTask;
 import pl.kofun.mavis.Library;
 import pl.kofun.mavis.MonthPlotter;
@@ -16,6 +17,11 @@ public class Apk{
 			
 		if(options.containsKey("Task"))
 		{
+			if(options.get("Task").equals("tmp"))
+			{
+				BlogClient.test();
+			}
+			
 			if(options.get("Task").equals("Ohil"))
 			{
 				task = new Library(options);
