@@ -21,7 +21,6 @@ import pl.kofun.mavis.utils.monthFileNameCreator;
 
 public class MonthPlotter implements MainTask{
 
-	private FilterBuilder builder;
 	private LinesCounter count;
 	private String gamesFileName;
 	
@@ -34,13 +33,12 @@ public class MonthPlotter implements MainTask{
 	
 	private FileNameCreator fileNameCreator;
 	
+	private DefaultCategoryDataset dataset;
+	
 	public MonthPlotter(Options options)
 	{
-		builder = new FilterBuilder();
-		
-		if(options.containsKey("booksfileName") && options.containsKey("gamesfileName"))
+		if(options.validForPlot())
 		{
-			String filter;
 			if(options.containsKey("monthtoPlot"))
 			{
 				month =  Integer.parseInt(options.get("monthtoPlot")) -1;
@@ -58,7 +56,9 @@ public class MonthPlotter implements MainTask{
 				year = Calendar.getInstance().get(Calendar.YEAR);
 			}
 			
-			filter = builder.makeFilter(month,year);
+			FilterBuilder builder = new FilterBuilder();
+			
+			String filter = builder.makeFilter(month,year);
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
 			apiCount = new ApiCounter();
@@ -68,29 +68,19 @@ public class MonthPlotter implements MainTask{
 			gamesFileName = new String(options.get("gamesfileName"));
 			
 			fileNameCreator = new monthFileNameCreator();
+			
+			dataset = new DefaultCategoryDataset();
 		}
 	}
 	
 	public void execute()
 	{
-		if(count != null && gamesFileName != null)
+		if(count != null)
 		{
-			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-			dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
-			
-			count.setFileToAccess(gamesFileName);
-			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
-			
-			apiCount.setBlogUrl(devUrl);
-			dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Dev Posts");
-			
-			apiCount.setBlogUrl(blogUrl);
-			dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Blog Posts");
+			prepareDataset();
 			
 			try
 			{
-				dataset.setValue(getData("Tasks"), "Finished", "Tasks");
-				
 				String chartName = fileNameCreator.createName(month, year);
 				
 				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
@@ -110,6 +100,28 @@ public class MonthPlotter implements MainTask{
 		else
 		{
 			this.usage();
+		}
+	}
+	
+	private void prepareDataset(){
+		dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
+		
+		count.setFileToAccess(gamesFileName);
+		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
+		
+		apiCount.setBlogUrl(devUrl);
+		dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Dev Posts");
+		
+		apiCount.setBlogUrl(blogUrl);
+		dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Blog Posts");
+		
+		try
+		{
+			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
+		}
+		catch(IOException e)
+		{
+			System.out.println(e);
 		}
 	}
 	
@@ -135,6 +147,8 @@ public class MonthPlotter implements MainTask{
 		System.out.println("For Month Plotter you must define:");
 		System.out.println("books filename as -b (argument) or booksfileName : (argument) inside txt file");
 		System.out.println("games filename as -g (argument) or gamesfileName : (argument) inside txt file");
+		System.out.println("blog url as -Burl (argument) or blogUrl : (argument) inside txt file");
+		System.out.println("devblog url as -Burl (argument) or devUrl : (argument) inside txt file");
 		System.out.println("You may want to specify");
 		System.out.println("Month to plot by -m (number) in command line");
 		System.out.println("Year to plot by -y (year) in command line");

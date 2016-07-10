@@ -48,4 +48,15 @@ public class Options {
 	{
 		saver.save(options);
 	}
+	
+	public boolean validForPlot()
+	{
+		if( options.contains("booksfileName") &&
+			options.contains("gamesfileName") &&
+			options.contains("blogUrl") &&
+			options.contains("devUrl") )
+			return true;
+		
+		return false;
+	}
 }
