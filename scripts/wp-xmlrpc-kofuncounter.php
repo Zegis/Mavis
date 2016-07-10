@@ -2,7 +2,7 @@
  /*
  Plugin Name: Kofun Counter
  Description: Add-on for Mavis project in form of plugin for Wordpress, that count posts from given time.
- Version: 0.1
+ Version: 0.2
  Author: Zegis
  Author: http://kofun.pl
  */
@@ -29,8 +29,23 @@ if( ! class_exists( 'Kofun_Counter') ) {
 			
 			$monthnum = $params[3];
 			
-			return 0;
-		
+			$args = array(
+				'year' => date('Y'),
+				'monthnum' => $monthnum
+			);
+			
+			$custom_query = new WP_Query($args);
+			
+			$ret = 0;
+			
+			if($custom_query->have_posts()){
+				while($custom_query->have_posts()){
+					$custom_query->the_post();
+					$ret = $ret+1;
+				}
+			}
+			
+			return $ret;
 		}
 	}
 		 
