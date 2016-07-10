@@ -2,8 +2,6 @@ package pl.kofun.mavis;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
-
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
@@ -22,30 +20,28 @@ public class BlogClient {
 	public void Configure(String blogUrl)
 	{
 	
-		try{
-		
-			
+		try		{	
 			config.setServerURL(new URL(blogUrl));
-			
 			client.setConfig(config);
-		}catch(MalformedURLException ex)
-		{
+		}
+		catch(MalformedURLException ex)		{
 			System.out.println("Provide valid URL!");
 		}
 	}
 	
-	public void Call(String procedureName, Object[] params)
+	public int Call(String procedureName, Object[] params)
 	{
+		int result;
 		try
 		{			
-			int result = (int) client.execute(procedureName,params);
-			
-			System.out.println(result);
+			result = (int) client.execute(procedureName,params);
 			
 		}catch(Exception ex)
 		{
-			System.out.println(ex);
+			result = -1;
 		}
+		
+		return result;
 	}
 	
 }

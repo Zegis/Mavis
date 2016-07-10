@@ -25,6 +25,10 @@ public class MonthPlotter implements MainTask{
 	private LinesCounter count;
 	private String gamesFileName;
 	
+	private ApiCounter apiCount;
+	private String blogUrl;
+	private String devUrl;
+	
 	private int month;
 	private int year;
 	
@@ -57,6 +61,10 @@ public class MonthPlotter implements MainTask{
 			filter = builder.makeFilter(month,year);
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
+			apiCount = new ApiCounter();
+			blogUrl = new String(options.get("blogUrl"));
+			devUrl = new String(options.get("devUrl"));
+			
 			gamesFileName = new String(options.get("gamesfileName"));
 			
 			fileNameCreator = new monthFileNameCreator();
@@ -73,10 +81,14 @@ public class MonthPlotter implements MainTask{
 			count.setFileToAccess(gamesFileName);
 			dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 			
+			apiCount.setBlogUrl(devUrl);
+			dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Dev Posts");
+			
+			apiCount.setBlogUrl(blogUrl);
+			dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Blog Posts");
+			
 			try
 			{
-				dataset.setValue(getData("Dev Posts"), "Finished", "Dev Posts");
-				dataset.setValue(getData("Blog Posts"), "Finished", "Blog Posts");
 				dataset.setValue(getData("Tasks"), "Finished", "Tasks");
 				
 				String chartName = fileNameCreator.createName(month, year);
