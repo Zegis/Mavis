@@ -1,5 +1,6 @@
 package pl.kofun.mavis;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -9,32 +10,35 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 public class BlogClient {
 
-	public static void test()
+	private XmlRpcClientConfigImpl config;
+	private XmlRpcClient client;
+	
+	public BlogClient()
+	{
+		config = new XmlRpcClientConfigImpl();
+		client = new XmlRpcClient();
+	}
+	
+	public void Configure(String blogUrl)
 	{
 	
 		try{
 		
 			
-			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-			config.setServerURL(new URL("http://blog.kofun.pl/xmlrpc.php"));
+			config.setServerURL(new URL(blogUrl));
 			
-			XmlRpcClient client = new XmlRpcClient();
 			client.setConfig(config);
-			
-
-			System.out.print("Enter login:");
-			String log = getPassword();
-			
-			System.out.print("Enter password:");
-			String pswd = getPassword();		
-			
-			String blogid = "1";
-			
-			String monthnum = "7";
-					
-			Object[] params = new Object[]{blogid, log, pswd, monthnum};
-			
-			int result = (int) client.execute("posts.countByMonth",params);
+		}catch(MalformedURLException ex)
+		{
+			System.out.println("Provide valid URL!");
+		}
+	}
+	
+	public void Call(String procedureName, Object[] params)
+	{
+		try
+		{			
+			int result = (int) client.execute(procedureName,params);
 			
 			System.out.println(result);
 			
@@ -42,18 +46,6 @@ public class BlogClient {
 		{
 			System.out.println(ex);
 		}
-	}
-	
-	
-	private static String getPassword()
-	{
-		String ret;
-		
-		Scanner input = new Scanner(System.in); // is not closed because it'd close System.in too. Let VM handle it.
-		
-		ret = input.nextLine();
-		
-		return ret;
 	}
 	
 }
