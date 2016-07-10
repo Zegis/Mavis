@@ -28,12 +28,15 @@ public class BlogClient {
 			System.out.print("Enter password:");
 			String pswd = getPassword();		
 			
+			String blogid = "1";
+			
+			String monthnum = "7";
 					
-			Object[] params = new Object[]{log, pswd};
+			Object[] params = new Object[]{blogid, log, pswd, monthnum};
 			
-			Object[] result = (Object[]) client.execute("wp.getUsersBlogs",params);
+			int result = (int) client.execute("posts.countByMonth",params);
 			
-			System.out.println(result[0].toString());
+			System.out.println(result);
 			
 		}catch(Exception ex)
 		{
