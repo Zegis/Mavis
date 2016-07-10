@@ -7,6 +7,9 @@ public class ApiCounter {
 	private BlogClient client;
 	private static String countMonthFunction = "posts.countByMonth";
 	
+	private String log;
+	private String pswd;
+	
 	public ApiCounter()
 	{
 		client = new BlogClient();
@@ -30,17 +33,20 @@ public class ApiCounter {
 		// Because in java January is 0, and our API assumes that January is 1.
 		++monthNumber;
 		
-		System.out.print("Enter login:");
-		String log = getData();
-			
-		System.out.print("Enter password:");
-		String pswd = getData();		
+		if(log == null || log.isEmpty()) {
+			System.out.print("Enter login:");
+			log = getData();
+		}
+		
+		if(pswd == null || pswd.isEmpty())
+		{
+			System.out.print("Enter password:");
+			pswd = getData();
+		}
 			
 		String blogid = "1";
-			
-		String monthnum = String.valueOf(monthNumber);
 					
-		Object[] params = new Object[]{blogid, log, pswd, monthnum};
+		Object[] params = new Object[]{blogid, log, pswd, String.valueOf(monthNumber)};
 			
 		ret = client.Call(countMonthFunction,params);
 		
