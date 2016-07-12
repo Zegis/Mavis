@@ -110,10 +110,10 @@ public class MonthPlotter implements MainTask{
 		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 		
 		apiCount.setBlogUrl(devUrl);
-		dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Dev Posts");
+		dataset.setValue(apiCount.count(year, month+1),"Finished","Dev Posts");
 		
 		apiCount.setBlogUrl(blogUrl);
-		dataset.setValue(apiCount.countPostsByMonth(month),"Finished","Blog Posts");
+		dataset.setValue(apiCount.count(year, month+1),"Finished","Blog Posts");
 		
 		try
 		{

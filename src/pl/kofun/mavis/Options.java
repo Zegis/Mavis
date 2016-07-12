@@ -51,10 +51,10 @@ public class Options {
 	
 	public boolean validForPlot()
 	{
-		if( options.contains("booksfileName") &&
-			options.contains("gamesfileName") &&
-			options.contains("blogUrl") &&
-			options.contains("devUrl") )
+		if( options.containsKey("booksfileName") &&
+			options.containsKey("gamesfileName") &&
+			options.containsKey("blogUrl") &&
+			options.containsKey("devUrl") )
 			return true;
 		
 		return false;

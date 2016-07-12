@@ -2,7 +2,7 @@
  /*
  Plugin Name: Kofun Counter
  Description: Add-on for Mavis project in form of plugin for Wordpress, that count posts from given time.
- Version: 0.2
+ Version: 0.3
  Author: Zegis
  Author: http://kofun.pl
  */
@@ -15,23 +15,16 @@ if( ! class_exists( 'Kofun_Counter') ) {
 		}
 		
 		public function add_count_xmlrpc_methods($methods){
-			$methods['posts.countByMonth'] = array( &$this, 'count_by_month' );
+			$methods['kofun.countForMonth'] = array( &$this, 'countPostsInMonth' );
 			return $methods;			
 		}
 		
-		function count_by_month ($params){
+		function countPostsInMonth ($params){
 		
 			global $wp_xmlrpc_server;
-			
-			$blog_id = $params[0];
-			$username = $params[1];
-			$password = $params[2];
-			
-			$monthnum = $params[3];
-			
 			$args = array(
-				'year' => date('Y'),
-				'monthnum' => $monthnum
+				'year' => $params[0],
+				'monthnum' => $params[1]
 			);
 			
 			$custom_query = new WP_Query($args);
@@ -41,7 +34,7 @@ if( ! class_exists( 'Kofun_Counter') ) {
 			if($custom_query->have_posts()){
 				while($custom_query->have_posts()){
 					$custom_query->the_post();
-					$ret = $ret+1;
+					$ret++;
 				}
 			}
 			
