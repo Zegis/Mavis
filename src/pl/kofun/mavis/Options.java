@@ -48,4 +48,15 @@ public class Options {
 	{
 		saver.save(options);
 	}
+	
+	public boolean validForPlot()
+	{
+		if( options.containsKey("booksfileName") &&
+			options.containsKey("gamesfileName") &&
+			options.containsKey("blogUrl") &&
+			options.containsKey("devUrl") )
+			return true;
+		
+		return false;
+	}
 }

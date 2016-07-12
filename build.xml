@@ -11,18 +11,31 @@
     <property name="source" value="1.8"/>
 	<property name="jcommon.vsn" value="1.0.23" />
 	<property name="jfreechart.vsn" value="1.0.19" />
+	<property name="apache.vsn" value="3.1.3" />
+	<property name="ws.vsn" value="1.0.2"/>
 	<property name="jcommon" value="https://repo1.maven.org/maven2/org/jfree/jcommon/${jcommon.vsn}"/>
 	<property name="jfreechart" value="https://repo1.maven.org/maven2/org/jfree/jfreechart/${jfreechart.vsn}"/>
+	<property name="xmlrpc-common" value= "http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-common/${apache.vsn}/"/>
+	<property name="xmlrpc-client" value=
+	"http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-client/${apache.vsn}/"/>
+	<property name="ws-commons-util" value=
+	"http://repo1.maven.org/maven2/org/apache/ws/commons/util/ws-commons-util/${ws.vsn}/"/>
     <path id="Mavis.classpath">
         <pathelement location="bin"/>
         <pathelement location="bin/jcommon-1.0.23.jar"/>
         <pathelement location="bin/jfreechart-1.0.19.jar"/>
+		<pathelement location="bin/xmlrpc-client-3.1.3.jar"/>
+		<pathelement location="bin/xmlrpc-common-3.1.3.jar"/>
+		<pathelement location="bin/ws-commons-util-1.0.2.jar"/>
     </path>
 	<target name="download-jchart">
 	<mkdir dir="lib"/>
 	<get src="https://repo1.maven.org/maven2/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar" dest="lib/" usetimestamp="true"/>
 	<get src="https://repo1.maven.org/maven2/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar"
 	dest="lib/" usetimestamp="true"/>
+	<get src="http://repo1.maven.org/maven2/org/apache/ws/commons/util/ws-commons-util/1.0.2/ws-commons-util-1.0.2.jar" dest="lib/" usetimestamp="true"/>
+	<get src="http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-common/3.1.3/xmlrpc-common-3.1.3.jar" dest="lib/" usetimestamp="true"/>
+	<get src="http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-client/3.1.3/xmlrpc-client-3.1.3.jar" dest="lib/" usetimestamp="true"/>
 	</target>
     <target depends="download-jchart" name="init">
         <mkdir dir="bin"/>

@@ -78,6 +78,16 @@ public class CommandLineParser implements OptionsParser{
 						options.put("save", "default");
 						++i;
 					}
+					else if(args[i].equalsIgnoreCase("-Burl"))
+					{
+						options.put("blogUrl",args[i+1]);
+						i+=2;
+					}
+					else if(args[i].equalsIgnoreCase("-Durl"))
+					{
+						options.put("devUrl",args[i+1]);
+						i+=2;
+					}
 					else
 					{
 						++i;

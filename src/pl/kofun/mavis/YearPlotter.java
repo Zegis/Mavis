@@ -29,16 +29,20 @@ public class YearPlotter implements MainTask{
 
 	private LinesCounter booksFileCounter;
 	private LinesCounter gamesFileCounter;
+	private ApiCounter blogCounter;
+	private ApiCounter devCounter;
 	private int yearToPlot;
 	
 	private FileNameCreator fileNameCreator;
 	
 	public YearPlotter(Options options)
 	{
-		if(options.containsKey("booksfileName") && options.containsKey("gamesfileName"))
+		if(options.validForPlot())
 		{
 			booksFileCounter = new LinesCounter(options.get("booksfileName"));
 			gamesFileCounter = new LinesCounter(options.get("gamesfileName"));
+			blogCounter = new ApiCounter(options.get("blogUrl"));
+			devCounter = new ApiCounter(options.get("devUrl"));
 		}
 		
 		if(options.containsKey("yeartoPlot"))
@@ -73,8 +77,8 @@ public class YearPlotter implements MainTask{
 					
 					books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
 					games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
-					posts.add(createSeriesDataItem(currentMonth,"posts"));
-					devposts.add(createSeriesDataItem(currentMonth, "devposts"));
+					posts.add(createSeriesDataItem(currentMonth,"posts",blogCounter));
+					devposts.add(createSeriesDataItem(currentMonth, "devposts",devCounter));
 				}
 			
 				TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -137,6 +141,12 @@ public class YearPlotter implements MainTask{
 			System.out.println(e);
 			return new TimeSeriesDataItem(currentMonth, 0.0);
 		}
+	}
+	
+	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name, ApiCounter counter)
+	{
+		return new TimeSeriesDataItem(currentMonth, counter.count(yearToPlot, currentMonth.getMonth()));
+		
 	}
 	
 	private int getData(String dataName) throws IOException
