@@ -5,6 +5,7 @@
  Version: 0.3
  Author: Zegis
  Author: http://kofun.pl
+ czyny id = 46
  */
 
 if( ! class_exists( 'Kofun_Counter') ) {
@@ -23,8 +24,10 @@ if( ! class_exists( 'Kofun_Counter') ) {
 		
 			global $wp_xmlrpc_server;
 			$args = array(
-				'year' => $params[0],
-				'monthnum' => $params[1]
+				'post_type'      => 'post',
+				'year'           => $params[0],
+				'monthnum'       => $params[1],
+				'tag__not_in'    => '46'
 			);
 			
 			$custom_query = new WP_Query($args);
