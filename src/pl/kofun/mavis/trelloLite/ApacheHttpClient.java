@@ -27,9 +27,7 @@ public class ApacheHttpClient {
 		this.token = token;
 	}
 	
-	public void get(){
-		// https://api.trello.com/1//board/57bc03ee2d424a313f5f5d91/lists?fields=name,id&key=4ec0ac42a9bf44fae0460b41b94fb494&token=ae49934c875291b3649a5ba151076325630f6b41319299989a72a4eab8946b4e
-		
+	public void get(){		
 		String url = "https://api.trello.com/1//board/57bc03ee2d424a313f5f5d91/lists?fields=name,id&key="
 				+ key + "&token=" + token;
 		
