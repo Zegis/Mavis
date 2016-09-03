@@ -15,7 +15,6 @@
 	<classpathentry kind="lib" path="D:/java/libs/httpcomponents-client-4.5.2/httpclient-cache-4.5.2.jar"/>
 	<classpathentry kind="lib" path="D:/java/libs/httpcomponents-client-4.5.2/httpclient-win-4.5.2.jar"/>
 	<classpathentry kind="lib" path="D:/java/libs/httpcomponents-client-4.5.2/httpmime-4.5.2.jar"/>
-	<classpathentry kind="lib" path="D:/java/libs/httpcomponents-client-4.5.2/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/java/libs/httpcomponents-client-4.5.2/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/java/libs/gson/gson-2.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

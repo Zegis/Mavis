@@ -36,6 +36,7 @@
         <pathelement location="bin/httpclient-cache-4.5.2.jar"/>
         <pathelement location="bin/httpclient-win-4.5.2.jar"/>
         <pathelement location="bin/httpmime-4.5.2.jar"/>
+    	<pathelement location="bin/gson-2.7.jar"/>
     </path>
 	<target name="download-jchart">
 	<mkdir dir="lib"/>
@@ -53,6 +54,7 @@
 	<get src="http://repo1.maven.org/maven2/org/apache/httpcomponents/httpmime/4.5.2/httpmime-4.5.2.jar" dest="lib/" usetimestamp="true"/>
 	<get src="http://central.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" dest="lib/" usetimestamp="true"/>
 	<get src="http://central.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar" dest="lib/" usetimestamp="true"/>
+		<get src="http://repo1.maven.org/maven2/com/google/code/gson/gson/2.7/gson-2.7.jar" dest="lib/" usetimestamp="true"/>
 	</target>
     <target depends="download-jchart" name="init">
         <mkdir dir="bin"/>
