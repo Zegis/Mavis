@@ -6,13 +6,19 @@ import pl.kofun.mavis.YearPlotter;
 import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.Options;
 
+import pl.kofun.mavis.trelloLite.ApacheHttpClient;;
+
 public class Apk{
 
 	public static void main(String args[]) throws IOException
 	{		
 		MainTask task;
 		Options options = new Options(args);			
-			
+		
+		ApacheHttpClient client = new ApacheHttpClient();
+		client.configure(options.get("apiKey"), options.get("apiToken"));
+		client.get();
+		
 		if(options.containsKey("Task"))
 		{	
 			if(options.get("Task").equals("Ohil"))
