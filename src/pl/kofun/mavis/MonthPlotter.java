@@ -3,7 +3,6 @@ package pl.kofun.mavis;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -24,7 +23,8 @@ public class MonthPlotter implements MainTask{
 	private LinesCounter count;
 	private String gamesFileName;
 	
-	private ApiCounter apiCount;
+	private BlogCounter blogCount;
+	private TrelloCounter trelloCount;
 	private String blogUrl;
 	private String devUrl;
 	
@@ -61,7 +61,8 @@ public class MonthPlotter implements MainTask{
 			String filter = builder.makeFilter(month,year);
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
-			apiCount = new ApiCounter();
+			blogCount = new BlogCounter();
+			trelloCount = new TrelloCounter(options.get("apiKey"), options.get("apiToken"),filter);
 			blogUrl = new String(options.get("blogUrl"));
 			devUrl = new String(options.get("devUrl"));
 			
@@ -109,37 +110,13 @@ public class MonthPlotter implements MainTask{
 		count.setFileToAccess(gamesFileName);
 		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
 		
-		apiCount.setBlogUrl(devUrl);
-		dataset.setValue(apiCount.count(year, month+1),"Finished","Dev Posts");
+		blogCount.setBlogUrl(devUrl);
+		dataset.setValue(blogCount.count(year, month+1),"Finished","Dev Posts");
 		
-		apiCount.setBlogUrl(blogUrl);
-		dataset.setValue(apiCount.count(year, month+1),"Finished","Blog Posts");
+		blogCount.setBlogUrl(blogUrl);
+		dataset.setValue(blogCount.count(year, month+1),"Finished","Blog Posts");
 		
-		try
-		{
-			dataset.setValue(getData("Tasks"), "Finished", "Tasks");
-		}
-		catch(IOException e)
-		{
-			System.out.println(e);
-		}
-	}
-	
-	private int getData(String dataName) throws IOException
-	{
-		int ret = 0;
-		Scanner input = new Scanner(System.in); // is not closed because it'd close System.in too. Let VM handle it.
-		
-		String val;
-		do
-		{
-			System.out.print("\nEnter number of " + dataName +": ");
-			val = input.nextLine();
-		}while(!val.matches("\\d+"));
-		ret = Integer.parseInt(val);
-		
-		
-		return ret;
+		dataset.setValue(trelloCount.count(), "Finished", "Tasks");
 	}
 
 	@Override

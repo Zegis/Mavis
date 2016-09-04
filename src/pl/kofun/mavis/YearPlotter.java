@@ -29,8 +29,9 @@ public class YearPlotter implements MainTask{
 
 	private LinesCounter booksFileCounter;
 	private LinesCounter gamesFileCounter;
-	private ApiCounter blogCounter;
-	private ApiCounter devCounter;
+	private BlogCounter blogCounter;
+	private BlogCounter devCounter;
+	private TrelloCounter tasksCounter;
 	private int yearToPlot;
 	
 	private FileNameCreator fileNameCreator;
@@ -41,8 +42,9 @@ public class YearPlotter implements MainTask{
 		{
 			booksFileCounter = new LinesCounter(options.get("booksfileName"));
 			gamesFileCounter = new LinesCounter(options.get("gamesfileName"));
-			blogCounter = new ApiCounter(options.get("blogUrl"));
-			devCounter = new ApiCounter(options.get("devUrl"));
+			blogCounter = new BlogCounter(options.get("blogUrl"));
+			devCounter = new BlogCounter(options.get("devUrl"));
+			tasksCounter = new TrelloCounter(options.get("apiKey"), options.get("apiToken"));
 		}
 		
 		if(options.containsKey("yeartoPlot"))
@@ -67,6 +69,7 @@ public class YearPlotter implements MainTask{
 				TimeSeries games = new TimeSeries("Games");			
 				TimeSeries posts = new TimeSeries("Posts");
 				TimeSeries devposts = new TimeSeries("Dev posts");
+				TimeSeries tasks = new TimeSeries("Tasks");
 				
 				FilterBuilder filterMaker = new FilterBuilder();
 				
@@ -79,6 +82,7 @@ public class YearPlotter implements MainTask{
 					games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
 					posts.add(createSeriesDataItem(currentMonth,"posts",blogCounter));
 					devposts.add(createSeriesDataItem(currentMonth, "devposts",devCounter));
+					tasks.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth,tasksCounter));
 				}
 			
 				TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -86,6 +90,7 @@ public class YearPlotter implements MainTask{
 				dataset.addSeries(games);
 				dataset.addSeries(posts);
 				dataset.addSeries(devposts);
+				dataset.addSeries(tasks);
 				
 				JFreeChart chart = ChartFactory.createTimeSeriesChart(
 						String.valueOf(yearToPlot),
@@ -130,40 +135,16 @@ public class YearPlotter implements MainTask{
 			return new TimeSeriesDataItem(currentMonth, counter.countLinesWithFilter());
 	}
 	
-	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name)
+	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, TrelloCounter counter)
 	{
-		try
-		{
-			return new TimeSeriesDataItem(currentMonth,getData(name + " in " + currentMonth));
-		}
-		catch(IOException e)
-		{
-			System.out.println(e);
-			return new TimeSeriesDataItem(currentMonth, 0.0);
-		}
+			counter.setFilter(filterForCurrentMonth);
+			return new TimeSeriesDataItem(currentMonth, counter.count());
 	}
 	
-	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name, ApiCounter counter)
+	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name, BlogCounter counter)
 	{
 		return new TimeSeriesDataItem(currentMonth, counter.count(yearToPlot, currentMonth.getMonth()));
 		
-	}
-	
-	private int getData(String dataName) throws IOException
-	{
-		int ret = 0;
-		Scanner input = new Scanner(System.in); // is not closed because it'd close System.in too. Let VM handle it.
-		
-		String val;
-		do
-		{
-			System.out.print("\nEnter number of " + dataName +": ");
-			val = input.nextLine();
-		}while(!val.matches("\\d+"));
-		ret = Integer.parseInt(val);
-		
-		
-		return ret;
 	}
 
 	@Override

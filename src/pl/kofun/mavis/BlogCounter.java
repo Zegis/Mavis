@@ -1,16 +1,16 @@
 package pl.kofun.mavis;
 
-public class ApiCounter {
+public class BlogCounter {
 
 	private BlogClient client;
 	private static String countMonthFunction = "kofun.countForMonth";
 	
-	public ApiCounter()
+	public BlogCounter()
 	{
 		client = new BlogClient();
 	}
 	
-	public ApiCounter(String blogUrl)
+	public BlogCounter(String blogUrl)
 	{
 		this();
 		client.Configure(blogUrl);
