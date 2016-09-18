@@ -3,6 +3,7 @@ package pl.kofun.mavis.trelloLite;
 import pl.kofun.mavis.trelloLite.Model.BoardList;
 import pl.kofun.mavis.trelloLite.Model.Card;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,11 +17,10 @@ public class TrelloLite {
 	private String key;
 	private String token;
 	
-	private static String baseUrl = "https://api.trello.com/1/";
+	private static String baseUrl = "https://api.trello.com/1";
 	private static String listsUrl = "/board/57bc03ee2d424a313f5f5d91/lists?fields=name,id";
 	
-	private static String cardsUrl_prefix = "/list/";
-	private static String cardsUrl_suffix = "/cards?fields=name";
+	private static String cardsUrl = "/list/{0}/cards?fields=name";
 	
 	public TrelloLite(String key, String token){
 		this.key = key;
@@ -77,9 +77,11 @@ public class TrelloLite {
 	{
 		StringBuilder url = new StringBuilder(baseUrl);
 		
-		url.append(cardsUrl_prefix);
-		url.append(listId);
-		url.append(cardsUrl_suffix);
+		MessageFormat urlFormatter = new MessageFormat(cardsUrl);
+		
+		Object[] args = {listId };
+		
+		url.append(urlFormatter.format(args));
 		url.append(prepareKeyToken());
 		
 		return url.toString();
