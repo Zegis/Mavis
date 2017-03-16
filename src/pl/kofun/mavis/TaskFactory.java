@@ -21,6 +21,10 @@ public class TaskFactory {
 			{
 				return new YearPlotter(options);
 			}
+			else if (options.get("Task").equals("Ps"))
+			{
+				return new Projects(); 
+			}
 		}
 		
 		return new DefaultTask();
