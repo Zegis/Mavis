@@ -88,6 +88,11 @@ public class CommandLineParser implements OptionsParser{
 						options.put("devUrl",args[i+1]);
 						i+=2;
 					}
+					else if(args[i].equalsIgnoreCase("-p"))
+					{
+						options.put("projectsfileName", args[i+1]);
+						i+=2;
+					}
 					else
 					{
 						++i;
