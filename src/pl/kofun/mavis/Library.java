@@ -64,8 +64,8 @@ public class Library implements MainTask{
 	@Override
 	public void usage() {
 		System.out.println("For Library you must define:");
-		System.out.println("Source filename as -s (argument) or source : (argument) inside txt file");
-		System.out.println("Target filename as -t (argument) or target : (argument) inside txt file");
+		System.out.println("Source filename as -s (argument) or sourcefileName : (argument) inside txt file");
+		System.out.println("Target filename as -t (argument) or targetfileName : (argument) inside txt file");
 		System.out.println("Filter to use as -f (argument) or filter : (argument) inside txt file");		
 	}
 
