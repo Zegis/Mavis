@@ -7,7 +7,7 @@ public class Project {
 	private String description;
 	private List<String> technologies;
 	private String repository;
-	private List<String> devPosts;
+	private List<Post> devPosts;
 	private String postMortem;
 	
 	public Project(String name)
@@ -67,20 +67,20 @@ public class Project {
 		this.postMortem = postMortem;
 	}
 
-	public List<String> getDevPosts() {
+	public List<Post> getDevPosts() {
 		return devPosts;
 	}
 
-	public void setDevPosts(List<String> devPosts) {
+	public void setDevPosts(List<Post> devPosts) {
 		this.devPosts = devPosts;
 	}
 	
-	public void addDevPost(String devPost)
+	public void addDevPost(Post devPost)
 	{
 		this.devPosts.add(devPost);
 	}
 	
-	public void removeDevPost(String devPost)
+	public void removeDevPost(Post devPost)
 	{
 		this.devPosts.remove(devPost);
 	}

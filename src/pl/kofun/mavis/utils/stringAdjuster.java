@@ -3,6 +3,7 @@ package pl.kofun.mavis.utils;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.kofun.mavis.Post;
 import pl.kofun.mavis.Project;
 
 import java.lang.StringBuilder;
@@ -81,17 +82,17 @@ public class stringAdjuster {
 		
 		if(projectToConvert.getDevPosts() != null)
 		{
-			List<String> devPosts = projectToConvert.getDevPosts();
+			List<Post> devPosts = projectToConvert.getDevPosts();
 			if(devPosts.size() > 0)
 			{
 				ret.append("<strong>Dev posts: </strong><ul>");
-				for(String post : devPosts)
+				for(Post post : devPosts)
 				{
 					ret.append("<li>");
 					ret.append("<a href='");
-					ret.append(post);
+					ret.append(post.getUrl());
 					ret.append("'>");
-					ret.append(post);
+					ret.append(post.getTitle());
 					ret.append("</a></li>");
 				}
 			}
