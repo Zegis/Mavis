@@ -1,14 +1,11 @@
 package pl.kofun.mavis;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.RandomAccessFile;
 import java.util.Collection;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import pl.kofun.mavis.Interfaces.MainTask;
@@ -18,12 +15,14 @@ public class ProjectsSummary implements MainTask {
 
 	private String sourceFileName;
 	private String targetFileName;
+	private String projectToPrint;
 	
 	public ProjectsSummary(Options options) {
-		if(options.containsKey("projectsfileName") && options.containsKey("targetfileName"))
+		if(options.containsKey("projectsfileName") && options.containsKey("targetfileName") && options.containsKey("projectName"))
 		{
 			sourceFileName = options.get("projectsfileName");
-			targetFileName = options.get("targetfileName");			
+			targetFileName = options.get("targetfileName");
+			projectToPrint = options.get("projectName");
 		}
 	}
 
@@ -61,6 +60,7 @@ public class ProjectsSummary implements MainTask {
 		System.out.println("For project you must define:");
 		System.out.println("Projects filename as -p (argument) or sourcefileName : (argument) inside txt file");
 		System.out.println("Target filename as -t (argument) or targetfileName : (argument) inside txt file");
+		System.out.println("Project name to print as -n (argument) or -a for all ";
 	}
 
 }

@@ -93,6 +93,16 @@ public class CommandLineParser implements OptionsParser{
 						options.put("projectsfileName", args[i+1]);
 						i+=2;
 					}
+					else if(args[i].equals("-n"))
+					{
+						options.put("projectName", args[i+1]);
+						i+=2;
+					}
+					else if(args[i].equals("-a"))
+					{
+						options.put("projectName", "All");
+						++i;
+					}
 					else
 					{
 						++i;
