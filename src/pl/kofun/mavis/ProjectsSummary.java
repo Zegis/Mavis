@@ -60,7 +60,7 @@ public class ProjectsSummary implements MainTask {
 		System.out.println("For project you must define:");
 		System.out.println("Projects filename as -p (argument) or sourcefileName : (argument) inside txt file");
 		System.out.println("Target filename as -t (argument) or targetfileName : (argument) inside txt file");
-		System.out.println("Project name to print as -n (argument) or -a for all ";
+		System.out.println("Project name to print as -n (argument) or -a for all ");
 	}
 
 }
