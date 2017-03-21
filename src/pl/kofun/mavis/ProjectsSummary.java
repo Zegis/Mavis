@@ -16,6 +16,7 @@ public class ProjectsSummary implements MainTask {
 	private String sourceFileName;
 	private String targetFileName;
 	private String projectToPrint;
+	private String tagUrl;
 	
 	public ProjectsSummary(Options options) {
 		if(options.containsKey("projectsfileName") && options.containsKey("targetfileName") && options.containsKey("projectName"))
@@ -23,6 +24,7 @@ public class ProjectsSummary implements MainTask {
 			sourceFileName = options.get("projectsfileName");
 			targetFileName = options.get("targetfileName");
 			projectToPrint = options.get("projectName");
+			tagUrl = options.get("tagUrl");
 		}
 	}
 
@@ -42,7 +44,7 @@ public class ProjectsSummary implements MainTask {
 				
 				for (Project project : projects) {
 					if(projectToPrint.equals("All") || projectToPrint.equals(project.getName()))
-						saveFile.writeBytes(stringAdjuster.convertProjectToPost(project));
+						saveFile.writeBytes(stringAdjuster.convertProjectToPost(project,tagUrl));
 				}
 				
 				saveFile.close();

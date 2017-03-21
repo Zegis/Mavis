@@ -34,7 +34,7 @@ public class stringAdjuster {
 		return ret;
 	}
 	
-	public static String convertProjectToPost(Project projectToConvert)
+	public static String convertProjectToPost(Project projectToConvert, String tagUrl)
 	{		
 		StringBuilder ret = new StringBuilder();
 		
@@ -57,7 +57,7 @@ public class stringAdjuster {
 				for (String technology : technologies) {
 					ret.append(prefix);
 					prefix = ", ";	
-					ret.append("<a href=''>");
+					ret.append(String.format("<a href='%s%s'>",tagUrl,technology));
 					ret.append(technology);
 					ret.append("</a>");
 				}
