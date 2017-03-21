@@ -40,7 +40,10 @@ public class ProjectsSummary implements MainTask {
 				RandomAccessFile saveFile = new RandomAccessFile(targetFileName, "rw");
 				saveFile.setLength(0);
 				
-				saveFile.writeBytes(stringAdjuster.convertProjectToPost(projects.get(0)));
+				for (Project project : projects) {
+					if(projectToPrint.equals("All") || projectToPrint.equals(project.getName()))
+						saveFile.writeBytes(stringAdjuster.convertProjectToPost(project));
+				}
 				
 				saveFile.close();
 				System.out.println("All green!");

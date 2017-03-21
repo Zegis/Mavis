@@ -93,17 +93,18 @@ public class stringAdjuster {
 					ret.append(post.getUrl());
 					ret.append("'>");
 					ret.append(post.getTitle());
-					ret.append("</a></li>");
+					ret.append("</a></li>\n");
 				}
 			}
 		}
 		
 		if(projectToConvert.getPostMortem() != null)
 		{
-			ret.append("\n<a href='");
+			ret.append("<a href='");
 			ret.append(projectToConvert.getPostMortem());
 			ret.append("'>Post Mortem</a>");
 		}
+		ret.append("\n");
 		
 		return ret.toString();
 	}
