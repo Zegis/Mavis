@@ -29,84 +29,81 @@ public class CommandLineParser implements OptionsParser{
 		{
 			options.put("Task", args[0]);
 			
-			if( (args.length-1)%2 == 0)
+			for(int i=1; i<args.length;)
 			{
-				for(int i=1; i<args.length;)
+				if(args[i].equalsIgnoreCase("-m") && i+1 < args.length)
 				{
-					if(args[i].equalsIgnoreCase("-m"))
-					{
-						options.put("monthtoPlot", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-b"))
-					{
-						options.put("booksfileName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-g"))
-					{
-						options.put("gamesfileName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-y"))
-					{
-						options.put("yeartoPlot", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-s"))
-					{
-						options.put("sourcefileName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-t"))
-					{
-						options.put("targetfileName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-f"))
-					{
-						options.put("filter", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-sf"))
-					{
-						options.put("save", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-d"))
-					{
-						options.put("save", "default");
-						++i;
-					}
-					else if(args[i].equalsIgnoreCase("-Burl"))
-					{
-						options.put("blogUrl",args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-Durl"))
-					{
-						options.put("devUrl",args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equalsIgnoreCase("-p"))
-					{
-						options.put("projectsfileName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equals("-n"))
-					{
-						options.put("projectName", args[i+1]);
-						i+=2;
-					}
-					else if(args[i].equals("-a"))
-					{
-						options.put("projectName", "All");
-						++i;
-					}
-					else
-					{
-						++i;
-					}
+					options.put("monthtoPlot", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-b") && i+1 < args.length)
+				{
+					options.put("booksfileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-g") && i+1 < args.length)
+				{
+					options.put("gamesfileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-y") && i+1 < args.length)
+				{
+					options.put("yeartoPlot", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-s") && i+1 < args.length)
+				{
+					options.put("sourcefileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-t") && i+1 < args.length)
+				{
+					options.put("targetfileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-f") && i+1 < args.length)
+				{
+					options.put("filter", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-sf") && i+1 < args.length)
+				{
+					options.put("save", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-d"))
+				{
+					options.put("save", "default");
+					++i;
+				}
+				else if(args[i].equalsIgnoreCase("-Burl") && i+1 < args.length)
+				{
+					options.put("blogUrl",args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-Durl") && i+1 < args.length)
+				{
+					options.put("devUrl",args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equalsIgnoreCase("-p") && i+1 < args.length)
+				{
+					options.put("projectsfileName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equals("-n") && i+1 < args.length)
+				{
+					options.put("projectName", args[i+1]);
+					i+=2;
+				}
+				else if(args[i].equals("-a"))
+				{
+					options.put("projectName", "All");
+					++i;
+				}
+				else
+				{
+					++i;
 				}
 			}
 		}

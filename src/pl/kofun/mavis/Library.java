@@ -49,6 +49,7 @@ public class Library implements MainTask{
 					savefile.writeBytes(books.get(i));
 				}
 				savefile.close();
+				System.out.println("All green");
 			}catch(IOException e){
 				System.out.println(e);
 			}
