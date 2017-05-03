@@ -14,6 +14,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.counters.BlogCounter;
+import pl.kofun.mavis.counters.Counter;
+import pl.kofun.mavis.counters.LinesCounter;
+import pl.kofun.mavis.counters.TrelloCounter;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.monthFileNameCreator;
@@ -24,7 +28,7 @@ public class MonthPlotter implements MainTask{
 	private String gamesFileName;
 	
 	private BlogCounter blogCount;
-	private TrelloCounter trelloCount;
+	private Counter trelloCount;
 	private String blogUrl;
 	private String devUrl;
 	
@@ -105,16 +109,17 @@ public class MonthPlotter implements MainTask{
 	}
 	
 	private void prepareDataset(){
-		dataset.setValue(count.countLinesWithFilter(), "Finished", "Books");
+		dataset.setValue(count.count(), "Finished", "Books");
 		
 		count.setFileToAccess(gamesFileName);
-		dataset.setValue(count.countLinesWithFilter(), "Finished", "Games");
+		dataset.setValue(count.count(), "Finished", "Games");
 		
 		blogCount.setBlogUrl(devUrl);
-		dataset.setValue(blogCount.count(year, month+1),"Finished","Dev Posts");
+		blogCount.setPeriodToCount(year, month+1);
+		dataset.setValue(blogCount.count(),"Finished","Dev Posts");
 		
 		blogCount.setBlogUrl(blogUrl);
-		dataset.setValue(blogCount.count(year, month+1),"Finished","Blog Posts");
+		dataset.setValue(blogCount.count(),"Finished","Blog Posts");
 		
 		dataset.setValue(trelloCount.count(), "Finished", "Tasks");
 	}

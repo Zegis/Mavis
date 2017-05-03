@@ -1,9 +1,13 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.counters;
 
-public class BlogCounter {
+import pl.kofun.mavis.utils.BlogClient;
+
+public class BlogCounter implements Counter {
 
 	private BlogClient client;
 	private static String countMonthFunction = "kofun.countForMonth";
+	int yearNumber;
+	int monthNumber;
 	
 	public BlogCounter()
 	{
@@ -21,7 +25,13 @@ public class BlogCounter {
 		client.Configure(blogUrl);
 	}
 	
-	public int count(int yearNumber, int monthNumber)
+	public void setPeriodToCount(int yearNumber, int monthNumber)
+	{
+		this.yearNumber = yearNumber;
+		this.monthNumber = monthNumber;
+	}
+	
+	public int count()
 	{
 		int ret = 0;
 					

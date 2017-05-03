@@ -20,6 +20,9 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
 import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.counters.BlogCounter;
+import pl.kofun.mavis.counters.LinesCounter;
+import pl.kofun.mavis.counters.TrelloCounter;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
 import pl.kofun.mavis.utils.yearFileNameCreator;
@@ -131,7 +134,7 @@ public class YearPlotter implements MainTask{
 	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, LinesCounter counter)
 	{
 			counter.setFilter(filterForCurrentMonth);
-			return new TimeSeriesDataItem(currentMonth, counter.countLinesWithFilter());
+			return new TimeSeriesDataItem(currentMonth, counter.count());
 	}
 	
 	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, TrelloCounter counter)
@@ -142,7 +145,8 @@ public class YearPlotter implements MainTask{
 	
 	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name, BlogCounter counter)
 	{
-		return new TimeSeriesDataItem(currentMonth, counter.count(yearToPlot, currentMonth.getMonth()));
+		counter.setPeriodToCount(yearToPlot, currentMonth.getMonth());
+		return new TimeSeriesDataItem(currentMonth, counter.count());
 		
 	}
 

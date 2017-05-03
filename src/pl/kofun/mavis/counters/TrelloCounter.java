@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.counters;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import pl.kofun.mavis.trelloLite.TrelloLite;
 import pl.kofun.mavis.trelloLite.Model.Card;
 import pl.kofun.mavis.trelloLite.Model.BoardList;
 
-public class TrelloCounter {
+public class TrelloCounter implements Counter {
 
 	TrelloLite client;
 	private String filter;
@@ -27,6 +27,7 @@ public class TrelloCounter {
 		this.filter = newFilter.substring(1,newFilter.length()-1);
 	}
 	
+	@Override
 	public int count()
 	{
 		int ret = 0;

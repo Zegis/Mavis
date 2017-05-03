@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.counters;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-public class LinesCounter{
+public class LinesCounter implements Counter{
 	
 	private FileInputStream inputHandle;
 	private BufferedReader file;
@@ -43,7 +43,7 @@ public class LinesCounter{
 		this.filter = new String(filter);
 	}
 	
-	public int countAllLines(){
+	private int countAllLines(){
 		
 		this.resetFile();
 		
@@ -65,7 +65,7 @@ public class LinesCounter{
 		}
 	}
 	
-	public int countLinesWithFilter(){
+	public int count(){
 		if(filter.isEmpty())
 			return countAllLines();
 		else{

@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
