@@ -25,10 +25,10 @@ public class BlogCounter implements Counter {
 		client.Configure(blogUrl);
 	}
 	
-	public void setPeriodToCount(int yearNumber, int monthNumber)
+	public void setPeriodToCount(PeriodToCount newPeriod)
 	{
-		this.yearNumber = yearNumber;
-		this.monthNumber = monthNumber;
+		this.yearNumber = newPeriod.Year;
+		this.monthNumber = newPeriod.Month + 1; // There's difference in indexing between java and wodpress
 	}
 	
 	public int count()

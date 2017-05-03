@@ -21,7 +21,9 @@ import org.jfree.data.time.TimeSeriesDataItem;
 
 import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.counters.BlogCounter;
+import pl.kofun.mavis.counters.Counter;
 import pl.kofun.mavis.counters.LinesCounter;
+import pl.kofun.mavis.counters.PeriodToCount;
 import pl.kofun.mavis.counters.TrelloCounter;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
@@ -75,16 +77,21 @@ public class YearPlotter implements MainTask{
 				
 				FilterBuilder filterMaker = new FilterBuilder();
 				
+				Month currentMonth;
+				PeriodToCount currentPeriod = new PeriodToCount();
+				currentPeriod.Year = yearToPlot;
+				
 				for(int i=1; i<13; ++i)
 				{
-					Month currentMonth = new Month(i,yearToPlot);
-					String filterForCurrentMonth = filterMaker.makeFilter(i-1,yearToPlot);
+					currentMonth = new Month(i,yearToPlot);
+					currentPeriod.Filter = filterMaker.makeFilter(i-1,yearToPlot);
+					currentPeriod.Month = i-1;
 					
-					books.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth, booksFileCounter));
-					games.add(createFileSeriesDataItem(currentMonth, filterForCurrentMonth, gamesFileCounter));
-					posts.add(createSeriesDataItem(currentMonth,"posts",blogCounter));
-					devposts.add(createSeriesDataItem(currentMonth, "devposts",devCounter));
-					tasks.add(createFileSeriesDataItem(currentMonth,filterForCurrentMonth,tasksCounter));
+					books.add(createFileSeriesDataItem(currentMonth,currentPeriod, booksFileCounter));
+					games.add(createFileSeriesDataItem(currentMonth, currentPeriod, gamesFileCounter));
+					posts.add(createSeriesDataItem(currentMonth,currentPeriod,blogCounter));
+					devposts.add(createSeriesDataItem(currentMonth,currentPeriod, devCounter));
+					tasks.add(createFileSeriesDataItem(currentMonth,currentPeriod,tasksCounter));
 				}
 			
 				TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -131,23 +138,16 @@ public class YearPlotter implements MainTask{
 		}
 	}
 	
-	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, LinesCounter counter)
+	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, PeriodToCount currentPeriod, Counter counter)
 	{
-			counter.setFilter(filterForCurrentMonth);
+			counter.setPeriodToCount(currentPeriod);
 			return new TimeSeriesDataItem(currentMonth, counter.count());
 	}
 	
-	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, String filterForCurrentMonth, TrelloCounter counter)
+	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, PeriodToCount currentPeriod, BlogCounter counter)
 	{
-			counter.setFilter(filterForCurrentMonth);
-			return new TimeSeriesDataItem(currentMonth, counter.count());
-	}
-	
-	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, String name, BlogCounter counter)
-	{
-		counter.setPeriodToCount(yearToPlot, currentMonth.getMonth());
+		counter.setPeriodToCount(currentPeriod);
 		return new TimeSeriesDataItem(currentMonth, counter.count());
-		
 	}
 
 	@Override

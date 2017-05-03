@@ -87,11 +87,6 @@ public class LinesCounter implements Counter{
 		}
 	}
 	
-	public void setFilter(String filterToApply){
-		if(!filterToApply.equals(filter))
-			filter = filterToApply;
-	}
-	
 	private void resetFile()
 	{
 		try
@@ -103,6 +98,12 @@ public class LinesCounter implements Counter{
 		{
 			System.out.print(e);
 		}
+	}
+
+	@Override
+	public void setPeriodToCount(PeriodToCount newPeriod) {
+		if(!newPeriod.Filter.equals(filter))
+			filter = newPeriod.Filter;		
 	}
 	
 }

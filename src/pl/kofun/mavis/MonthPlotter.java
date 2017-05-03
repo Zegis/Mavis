@@ -17,6 +17,7 @@ import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.counters.BlogCounter;
 import pl.kofun.mavis.counters.Counter;
 import pl.kofun.mavis.counters.LinesCounter;
+import pl.kofun.mavis.counters.PeriodToCount;
 import pl.kofun.mavis.counters.TrelloCounter;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.FilterBuilder;
@@ -32,8 +33,7 @@ public class MonthPlotter implements MainTask{
 	private String blogUrl;
 	private String devUrl;
 	
-	private int month;
-	private int year;
+	private PeriodToCount monthToCount;
 	
 	private FileNameCreator fileNameCreator;
 	
@@ -43,6 +43,7 @@ public class MonthPlotter implements MainTask{
 	{
 		if(options.validForPlot())
 		{
+			int month, year;
 			if(options.containsKey("monthtoPlot"))
 			{
 				month =  Integer.parseInt(options.get("monthtoPlot")) -1;
@@ -63,6 +64,7 @@ public class MonthPlotter implements MainTask{
 			FilterBuilder builder = new FilterBuilder();
 			
 			String filter = builder.makeFilter(month,year);
+			monthToCount = new PeriodToCount(year, month, filter);
 			
 			count = new LinesCounter(options.get("booksfileName"), filter);
 			blogCount = new BlogCounter();
@@ -86,7 +88,7 @@ public class MonthPlotter implements MainTask{
 			
 			try
 			{
-				String chartName = fileNameCreator.createName(month, year);
+				String chartName = fileNameCreator.createName(monthToCount.Month, monthToCount.Year);
 				
 				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
 				
@@ -115,7 +117,7 @@ public class MonthPlotter implements MainTask{
 		dataset.setValue(count.count(), "Finished", "Games");
 		
 		blogCount.setBlogUrl(devUrl);
-		blogCount.setPeriodToCount(year, month+1);
+		blogCount.setPeriodToCount(monthToCount);
 		dataset.setValue(blogCount.count(),"Finished","Dev Posts");
 		
 		blogCount.setBlogUrl(blogUrl);

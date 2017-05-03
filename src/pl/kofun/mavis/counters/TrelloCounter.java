@@ -19,17 +19,7 @@ public class TrelloCounter implements Counter {
 	public TrelloCounter(String key, String token, String filter)
 	{
 		client = new TrelloLite(key, token);
-		// We need to trim filter, as typical filter has parenthesis
-		this.filter = filter.substring(1, filter.length()-1);
-	}
-	
-	public void setFilter(String newFilter)
-	{
-		if(!newFilter.equals(filter))
-		{
-			// We need to trim filter, as typical filter has parenthesis
-			this.filter = newFilter.substring(1,newFilter.length()-1);
-		}
+		this.filter = trimFilter(filter);
 	}
 	
 	@Override
@@ -50,5 +40,23 @@ public class TrelloCounter implements Counter {
 		}			
 		
 		return ret;
+	}
+
+	@Override
+	public void setPeriodToCount(PeriodToCount newPeriod) {
+		if(!newPeriod.Filter.equals(filter))
+		{
+			this.filter = trimFilter(newPeriod.Filter);
+		}	
+	}
+	
+	private String trimFilter(String filterToApply)
+	{
+		// We need to trim filter, as typical filter has parenthesis
+		if(filterToApply.charAt(0) == '(' 
+				&& filterToApply.charAt(filterToApply.length() -1) == ')')
+			return filterToApply.substring(1, filterToApply.length()-1);
+		else
+			return filterToApply;
 	}
 }
