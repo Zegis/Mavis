@@ -89,8 +89,8 @@ public class YearPlotter implements MainTask{
 					
 					books.add(createFileSeriesDataItem(currentMonth,currentPeriod, booksFileCounter));
 					games.add(createFileSeriesDataItem(currentMonth, currentPeriod, gamesFileCounter));
-					posts.add(createSeriesDataItem(currentMonth,currentPeriod,blogCounter));
-					devposts.add(createSeriesDataItem(currentMonth,currentPeriod, devCounter));
+					posts.add(createFileSeriesDataItem(currentMonth,currentPeriod,blogCounter));
+					devposts.add(createFileSeriesDataItem(currentMonth,currentPeriod, devCounter));
 					tasks.add(createFileSeriesDataItem(currentMonth,currentPeriod,tasksCounter));
 				}
 			
@@ -142,12 +142,6 @@ public class YearPlotter implements MainTask{
 	{
 			counter.setPeriodToCount(currentPeriod);
 			return new TimeSeriesDataItem(currentMonth, counter.count());
-	}
-	
-	private TimeSeriesDataItem createSeriesDataItem(Month currentMonth, PeriodToCount currentPeriod, BlogCounter counter)
-	{
-		counter.setPeriodToCount(currentPeriod);
-		return new TimeSeriesDataItem(currentMonth, counter.count());
 	}
 
 	@Override
