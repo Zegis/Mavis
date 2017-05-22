@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.tasks;
 
 import pl.kofun.mavis.Interfaces.MainTask;
 

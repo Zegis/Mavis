@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.tasks;
 
 import java.io.FileReader;
 import java.io.RandomAccessFile;
@@ -8,7 +8,9 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import pl.kofun.mavis.Options;
 import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.models.Project;
 import pl.kofun.mavis.utils.stringAdjuster;
 
 public class ProjectsSummary implements MainTask {

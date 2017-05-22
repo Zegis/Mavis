@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.io;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -17,12 +17,12 @@ public class FileParser implements OptionsParser {
 
 	Hashtable<String, String> _options;
 	
-	FileParser()
+	public FileParser()
 	{
 		_options = new Hashtable<String,String>();
 	}
 	
-	FileParser(Hashtable<String, String> options)
+	public FileParser(Hashtable<String, String> options)
 	{
 		_options = options;
 	}

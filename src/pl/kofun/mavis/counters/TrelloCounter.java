@@ -2,6 +2,7 @@ package pl.kofun.mavis.counters;
 
 import java.util.List;
 
+import pl.kofun.mavis.Interfaces.Counter;
 import pl.kofun.mavis.trelloLite.TrelloLite;
 import pl.kofun.mavis.trelloLite.Model.Card;
 import pl.kofun.mavis.trelloLite.Model.BoardList;

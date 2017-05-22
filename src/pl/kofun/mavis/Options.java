@@ -4,6 +4,9 @@ import java.util.Hashtable;
 
 import pl.kofun.mavis.Interfaces.OptionsParser;
 import pl.kofun.mavis.Interfaces.OptionsSaver;
+import pl.kofun.mavis.io.CommandLineParser;
+import pl.kofun.mavis.io.FileParser;
+import pl.kofun.mavis.io.FileSaver;
 
 public class Options {
 

@@ -1,5 +1,6 @@
 package pl.kofun.mavis.counters;
 
+import pl.kofun.mavis.Interfaces.Counter;
 import pl.kofun.mavis.utils.BlogClient;
 
 public class BlogCounter implements Counter {

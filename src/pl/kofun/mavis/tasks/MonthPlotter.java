@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.tasks;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,10 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import pl.kofun.mavis.Options;
+import pl.kofun.mavis.Interfaces.Counter;
 import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.counters.BlogCounter;
-import pl.kofun.mavis.counters.Counter;
 import pl.kofun.mavis.counters.LinesCounter;
 import pl.kofun.mavis.counters.PeriodToCount;
 import pl.kofun.mavis.counters.TrelloCounter;

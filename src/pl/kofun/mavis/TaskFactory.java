@@ -1,6 +1,11 @@
 package pl.kofun.mavis;
 
 import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.tasks.DefaultTask;
+import pl.kofun.mavis.tasks.Library;
+import pl.kofun.mavis.tasks.MonthPlotter;
+import pl.kofun.mavis.tasks.ProjectsSummary;
+import pl.kofun.mavis.tasks.YearPlotter;
 
 public class TaskFactory {
 

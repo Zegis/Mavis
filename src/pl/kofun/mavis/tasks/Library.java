@@ -1,7 +1,9 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.tasks;
 
 
+import pl.kofun.mavis.Options;
 import pl.kofun.mavis.Interfaces.MainTask;
+import pl.kofun.mavis.io.FilterLineReader;
 import pl.kofun.mavis.utils.stringAdjuster;
 
 import java.io.IOException;

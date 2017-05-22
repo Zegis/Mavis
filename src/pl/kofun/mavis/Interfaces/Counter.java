@@ -1,4 +1,6 @@
-package pl.kofun.mavis.counters;
+package pl.kofun.mavis.Interfaces;
+
+import pl.kofun.mavis.counters.PeriodToCount;
 
 public interface Counter {
 

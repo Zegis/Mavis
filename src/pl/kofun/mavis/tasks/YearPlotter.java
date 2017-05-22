@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.tasks;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +19,10 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import pl.kofun.mavis.Options;
+import pl.kofun.mavis.Interfaces.Counter;
 import pl.kofun.mavis.Interfaces.MainTask;
 import pl.kofun.mavis.counters.BlogCounter;
-import pl.kofun.mavis.counters.Counter;
 import pl.kofun.mavis.counters.LinesCounter;
 import pl.kofun.mavis.counters.PeriodToCount;
 import pl.kofun.mavis.counters.TrelloCounter;

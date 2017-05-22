@@ -3,8 +3,8 @@ package pl.kofun.mavis.utils;
 import java.util.LinkedList;
 import java.util.List;
 
-import pl.kofun.mavis.Post;
-import pl.kofun.mavis.Project;
+import pl.kofun.mavis.models.Post;
+import pl.kofun.mavis.models.Project;
 
 import java.lang.StringBuilder;
 

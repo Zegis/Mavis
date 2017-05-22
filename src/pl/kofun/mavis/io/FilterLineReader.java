@@ -1,4 +1,4 @@
-package pl.kofun.mavis;
+package pl.kofun.mavis.io;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
