@@ -47,6 +47,11 @@ public class Options {
 		return options.containsKey(key);		
 	}
 	
+	public void setTask(String value)
+	{
+		options.put("Task", value);
+	}
+	
 	public void save()
 	{
 		saver.save(options);
