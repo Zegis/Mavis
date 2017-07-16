@@ -4,16 +4,16 @@ import java.util.Hashtable;
 
 import pl.kofun.mavis.Interfaces.OptionsParser;
 
-public class CommandLineParser implements OptionsParser{
+public class CommandLineOptionsParser implements OptionsParser{
 
 	Hashtable<String, String> options;
 	
-	public CommandLineParser()
+	public CommandLineOptionsParser()
 	{
 		options = new Hashtable<String,String>();
 	}
 	
-	public CommandLineParser(Hashtable<String,String> opt)
+	public CommandLineOptionsParser(Hashtable<String,String> opt)
 	{
 		options = opt;
 	}

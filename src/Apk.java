@@ -23,7 +23,6 @@ public class Apk extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
 		
 		Button Mpbtn = new Button();
 		Mpbtn.setText("Make month plot");

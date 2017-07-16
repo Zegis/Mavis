@@ -4,9 +4,9 @@ import java.util.Hashtable;
 
 import pl.kofun.mavis.Interfaces.OptionsParser;
 import pl.kofun.mavis.Interfaces.OptionsSaver;
-import pl.kofun.mavis.io.CommandLineParser;
-import pl.kofun.mavis.io.FileParser;
-import pl.kofun.mavis.io.FileSaver;
+import pl.kofun.mavis.io.CommandLineOptionsParser;
+import pl.kofun.mavis.io.FileOptionsParser;
+import pl.kofun.mavis.io.FileOptionsSaver;
 
 public class Options {
 
@@ -20,19 +20,19 @@ public class Options {
 		
 		if(("-l").equalsIgnoreCase(args[0]))
 		{
-			parser = new FileParser(options);
+			parser = new FileOptionsParser(options);
 		}
 		else
-			parser = new CommandLineParser(options);
+			parser = new CommandLineOptionsParser(options);
 		
 		parser.load(args);
 		
-		saver = new FileSaver();
+		saver = new FileOptionsSaver();
 	}
 
 	private Hashtable<String, String> loadDefaults()
 	{
-		parser = new FileParser();
+		parser = new FileOptionsParser();
 		
 		return parser.load();
 	}

@@ -13,16 +13,16 @@ import pl.kofun.mavis.Interfaces.OptionsParser;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.saveFileNameCreator;
 
-public class FileParser implements OptionsParser {
+public class FileOptionsParser implements OptionsParser {
 
 	Hashtable<String, String> _options;
 	
-	public FileParser()
+	public FileOptionsParser()
 	{
 		_options = new Hashtable<String,String>();
 	}
 	
-	public FileParser(Hashtable<String, String> options)
+	public FileOptionsParser(Hashtable<String, String> options)
 	{
 		_options = options;
 	}

@@ -10,7 +10,7 @@ import pl.kofun.mavis.Interfaces.OptionsSaver;
 import pl.kofun.mavis.utils.FileNameCreator;
 import pl.kofun.mavis.utils.saveFileNameCreator;
 
-public class FileSaver implements OptionsSaver {
+public class FileOptionsSaver implements OptionsSaver {
 
 	@Override
 	public void save(Hashtable<String, String> options) {
