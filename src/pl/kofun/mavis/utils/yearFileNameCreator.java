@@ -33,4 +33,3 @@ public class yearFileNameCreator extends FileNameCreator {
 		return createName(Calendar.getInstance().get(Calendar.YEAR));
 	}
 }
-

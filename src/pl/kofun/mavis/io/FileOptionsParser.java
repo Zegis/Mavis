@@ -16,47 +16,28 @@ import pl.kofun.mavis.utils.saveFileNameCreator;
 public class FileOptionsParser implements OptionsParser {
 
 	Hashtable<String, String> _options;
+	FileNameCreator fileNameCreator;
 	
 	public FileOptionsParser()
 	{
-		_options = new Hashtable<String,String>();
+		this(new Hashtable<String,String>());
 	}
 	
 	public FileOptionsParser(Hashtable<String, String> options)
 	{
 		_options = options;
+		fileNameCreator = new saveFileNameCreator();
 	}
 	
 	@Override
 	public Hashtable<String, String> load(String... args) {
 
-		FileNameCreator fileNameCreator = new saveFileNameCreator();
-		String fileName;
-		if(args.length == 2)
-		{
-			
-			fileName = fileNameCreator.createName(Optional.of(args[1]));
-		}
-		else
-		{
-			fileName = fileNameCreator.createName(Optional.empty());
-		}
+		
+		String fileName = getOptionsFileName(args);
 		
 		try
 		{
-			FileInputStream inputStream = new FileInputStream(fileName);
-			BufferedReader filereader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-			String currentLine;
-			while( (currentLine = filereader.readLine()) != null)
-			{
-				if(currentLine.contains(" : "))
-				{
-					String[] optionsString = currentLine.split(" : ", 2);
-					_options.put(optionsString[0], optionsString[1]);
-				}
-					
-			}
-			filereader.close();
+			createFileAndReadOptions(fileName);
 		}
 		catch(UnsupportedEncodingException ex)
 		{
@@ -64,7 +45,7 @@ public class FileOptionsParser implements OptionsParser {
 		}
 		catch(FileNotFoundException ex)
 		{
-			if(fileName.equals(fileNameCreator.createName(Optional.empty())))
+			if(fileName.equals(getDefaultFileName()))
 				System.out.println("Can't find default config!");
 			else
 				System.out.println("Unable to open given save file:" + fileName);
@@ -75,6 +56,54 @@ public class FileOptionsParser implements OptionsParser {
 		}
 		
 		return _options;
+	}
+	
+	private String getOptionsFileName(String... args)
+	{
+		Optional<String> fileNameTemplate = getFileNameTemplate(args);
+		return fileNameCreator.createName(fileNameTemplate);
+	}
+	
+	private Optional<String> getFileNameTemplate(String... args)
+	{
+		if(args.length == 2)
+		{
+			return Optional.of(args[1]);
+		}
+		else
+		{
+			return Optional.empty();
+		}
+	}
+	
+	private void createFileAndReadOptions(String fileName) throws IOException
+	{
+		BufferedReader fileReader = openFile(fileName);
+		String currentLine;
+		while( (currentLine = fileReader.readLine()) != null)
+		{
+			parseLine(currentLine);
+		}
+		fileReader.close();
+	}
+	
+	private BufferedReader openFile(String fileName) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		FileInputStream inputStream = new FileInputStream(fileName);
+		return new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+	}
+	
+	private void parseLine(String currentLine){
+		if(currentLine.contains(" : "))
+		{
+			String[] optionsString = currentLine.split(" : ", 2);
+			_options.put(optionsString[0], optionsString[1]);
+		}	
+	}
+	
+	private String getDefaultFileName()
+	{
+		return fileNameCreator.createName(Optional.empty());
 	}
 
 }
