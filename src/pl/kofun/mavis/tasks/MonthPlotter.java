@@ -95,9 +95,7 @@ public class MonthPlotter implements MainTask{
 				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset,
 																PlotOrientation.VERTICAL, false, false, true);
 				
-				CategoryPlot plot = chart.getCategoryPlot();
-				NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();			
-				rangeAxis.setTickUnit(new NumberTickUnit(1));
+				setPlotScale(chart, 1);
 				
 				ChartUtilities.saveChartAsJPEG(new File(chartName), chart, 500, 300);
 				
@@ -129,6 +127,15 @@ public class MonthPlotter implements MainTask{
 		dataset.setValue(trelloCount.count(), "Finished", "Tasks");
 	}
 
+	private void setPlotScale(JFreeChart chartToScale, double scale)
+	{
+		NumberTickUnit unit = new NumberTickUnit(scale);
+		
+		CategoryPlot plot = chartToScale.getCategoryPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		rangeAxis.setTickUnit(unit);
+	}
+	
 	@Override
 	public void usage() {
 		System.out.println("For Month Plotter you must define:");
