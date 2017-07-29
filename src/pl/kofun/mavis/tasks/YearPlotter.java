@@ -70,37 +70,7 @@ public class YearPlotter implements MainTask{
 		{
 			try
 			{			
-				TimeSeries books = new TimeSeries("Books");			
-				TimeSeries games = new TimeSeries("Games");			
-				TimeSeries posts = new TimeSeries("Posts");
-				TimeSeries devposts = new TimeSeries("Dev posts");
-				TimeSeries tasks = new TimeSeries("Tasks");
-				
-				FilterBuilder filterMaker = new FilterBuilder();
-				
-				Month currentMonth;
-				PeriodToCount currentPeriod = new PeriodToCount();
-				currentPeriod.Year = yearToPlot;
-				
-				for(int i=1; i<13; ++i)
-				{
-					currentMonth = new Month(i,yearToPlot);
-					currentPeriod.Filter = filterMaker.makeFilter(i-1,yearToPlot);
-					currentPeriod.Month = i-1;
-					
-					books.add(createFileSeriesDataItem(currentMonth,currentPeriod, booksFileCounter));
-					games.add(createFileSeriesDataItem(currentMonth, currentPeriod, gamesFileCounter));
-					posts.add(createFileSeriesDataItem(currentMonth,currentPeriod,blogCounter));
-					devposts.add(createFileSeriesDataItem(currentMonth,currentPeriod, devCounter));
-					tasks.add(createFileSeriesDataItem(currentMonth,currentPeriod,tasksCounter));
-				}
-			
-				TimeSeriesCollection dataset = new TimeSeriesCollection();
-				dataset.addSeries(books);
-				dataset.addSeries(games);
-				dataset.addSeries(posts);
-				dataset.addSeries(devposts);
-				dataset.addSeries(tasks);
+				TimeSeriesCollection dataset = prepareDataset();
 				
 				JFreeChart chart = ChartFactory.createTimeSeriesChart(
 						String.valueOf(yearToPlot),
@@ -137,6 +107,43 @@ public class YearPlotter implements MainTask{
 		{
 			this.usage();
 		}
+	}
+	
+	private TimeSeriesCollection prepareDataset()
+	{
+		TimeSeries books = new TimeSeries("Books");			
+		TimeSeries games = new TimeSeries("Games");			
+		TimeSeries posts = new TimeSeries("Posts");
+		TimeSeries devposts = new TimeSeries("Dev posts");
+		TimeSeries tasks = new TimeSeries("Tasks");
+		
+		FilterBuilder filterMaker = new FilterBuilder();
+		
+		Month currentMonth;
+		PeriodToCount currentPeriod = new PeriodToCount();
+		currentPeriod.Year = yearToPlot;
+		
+		for(int i=1; i<13; ++i)
+		{
+			currentMonth = new Month(i,yearToPlot);
+			currentPeriod.Filter = filterMaker.makeFilter(i-1,yearToPlot);
+			currentPeriod.Month = i-1;
+			
+			books.add(createFileSeriesDataItem(currentMonth,currentPeriod, booksFileCounter));
+			games.add(createFileSeriesDataItem(currentMonth, currentPeriod, gamesFileCounter));
+			posts.add(createFileSeriesDataItem(currentMonth,currentPeriod,blogCounter));
+			devposts.add(createFileSeriesDataItem(currentMonth,currentPeriod, devCounter));
+			tasks.add(createFileSeriesDataItem(currentMonth,currentPeriod,tasksCounter));
+		}
+	
+		TimeSeriesCollection dataset = new TimeSeriesCollection();
+		dataset.addSeries(books);
+		dataset.addSeries(games);
+		dataset.addSeries(posts);
+		dataset.addSeries(devposts);
+		dataset.addSeries(tasks);
+		
+		return dataset;
 	}
 	
 	private TimeSeriesDataItem createFileSeriesDataItem(Month currentMonth, PeriodToCount currentPeriod, Counter counter)

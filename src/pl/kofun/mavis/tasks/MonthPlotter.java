@@ -44,32 +44,12 @@ public class MonthPlotter implements MainTask{
 	{
 		if(options.validForPlot())
 		{
-			int month, year;
-			if(options.containsKey("monthtoPlot"))
-			{
-				month =  Integer.parseInt(options.get("monthtoPlot")) -1;
-			}
-			else
-			{
-				month = Calendar.getInstance().get(Calendar.MONTH);
-			}
-			if(options.containsKey("yeartoPlot"))
-			{
-				year = Integer.parseInt(options.get("yeartoPlot"));
-			}
-			else
-			{
-				year = Calendar.getInstance().get(Calendar.YEAR);
-			}
+			monthToCount = getPlotPeriod(options);
 			
-			FilterBuilder builder = new FilterBuilder();
-			
-			String filter = builder.makeFilter(month,year);
-			monthToCount = new PeriodToCount(year, month, filter);
-			
-			count = new LinesCounter(options.get("booksfileName"), filter);
+			count = new LinesCounter(options.get("booksfileName"), monthToCount.Filter);
 			blogCount = new BlogCounter();
-			trelloCount = new TrelloCounter(options.get("apiKey"), options.get("apiToken"),filter);
+			trelloCount = new TrelloCounter(options.get("apiKey"), options.get("apiToken"), monthToCount.Filter);
+			
 			blogUrl = new String(options.get("blogUrl"));
 			devUrl = new String(options.get("devUrl"));
 			
@@ -79,6 +59,27 @@ public class MonthPlotter implements MainTask{
 			
 			dataset = new DefaultCategoryDataset();
 		}
+	}
+	
+	private PeriodToCount getPlotPeriod(Options options)
+	{
+		int month, year;
+		
+		if(options.containsKey("monthtoPlot"))
+			month =  Integer.parseInt(options.get("monthtoPlot")) -1;
+		else
+			month = Calendar.getInstance().get(Calendar.MONTH);
+		
+		if(options.containsKey("yeartoPlot"))
+			year = Integer.parseInt(options.get("yeartoPlot"));
+		else
+			year = Calendar.getInstance().get(Calendar.YEAR);
+		
+		FilterBuilder filterBuilder = new FilterBuilder();
+		String filter = filterBuilder.makeFilter(month, year);
+		
+		return new PeriodToCount(year, month, filter);
+	
 	}
 	
 	public void execute()
@@ -91,7 +92,8 @@ public class MonthPlotter implements MainTask{
 			{
 				String chartName = fileNameCreator.createName(monthToCount.Month, monthToCount.Year);
 				
-				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset, PlotOrientation.VERTICAL, false, false, true);
+				JFreeChart chart = ChartFactory.createBarChart("Month Plot", "Medium", "Finished", dataset,
+																PlotOrientation.VERTICAL, false, false, true);
 				
 				CategoryPlot plot = chart.getCategoryPlot();
 				NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();			
