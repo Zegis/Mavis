@@ -84,14 +84,8 @@ public class YearPlotter implements MainTask{
 				
 				String chartFilename = fileNameCreator.createName(yearToPlot);
 				
-				XYPlot plot = chart.getXYPlot();
-				NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
-				yaxis.setTickUnit(new NumberTickUnit(1));
+				setMonthAmountScaleAndLabels(chart, 1, DateTickUnitType.MONTH, 1);
 				
-				DateAxis xaxis = (DateAxis) plot.getDomainAxis();
-				
-				xaxis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1));
-				xaxis.setDateFormatOverride(new SimpleDateFormat("MMM"));
 				
 				
 				ChartUtilities.saveChartAsJPEG(new File(chartFilename), chart, 500, 300);
@@ -150,6 +144,28 @@ public class YearPlotter implements MainTask{
 	{
 			counter.setPeriodToCount(currentPeriod);
 			return new TimeSeriesDataItem(currentMonth, counter.count());
+	}
+	
+	private void setMonthAmountScaleAndLabels(JFreeChart chartToScale, double scale, DateTickUnitType labelType, int labelScale)
+	{
+		XYPlot plot = chartToScale.getXYPlot();
+		setMonthAmountScale(plot, scale);
+		
+		setLabels(plot, labelType, labelScale);		
+	}
+	
+	private void setMonthAmountScale(XYPlot plot, double scale)
+	{
+		NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
+		yaxis.setTickUnit(new NumberTickUnit(scale));
+	}
+	
+	private void setLabels(XYPlot plot, DateTickUnitType labelType, int labelScale)
+	{
+		DateAxis xaxis = (DateAxis) plot.getDomainAxis();
+		
+		xaxis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1));
+		xaxis.setDateFormatOverride(new SimpleDateFormat("MMM"));
 	}
 
 	@Override
