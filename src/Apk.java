@@ -18,7 +18,13 @@ public class Apk extends Application{
 	public static void main(String args[])
 	{		
 		options = new Options(args);
-		launch(args);
+		if(options.get("Task").equals("Gui"))
+				launch(args);
+		else
+			{
+				MainTask cliTask = TaskFactory.CreateTask(options);
+				cliTask.execute();
+			}
 	}
 
 	@Override
