@@ -38,7 +38,7 @@ public class BlogClient {
 			
 		}catch(Exception ex)
 		{
-			result = -1;
+			result = 0;
 		}
 		
 		return result;
